@@ -98,9 +98,9 @@ Don't get me wrong, clojure is a good language.  But since it is dynamically typ
 dynamically typed languages all have:  they dont scale out very well.  And if you think [core.typed][-cljtype] is a
 solution, it has many limitations.  If you don't believe me, check out these other blogs:
 
-- http://martintrojer.github.io/beyond-clojure/2016/04/19/beyond-clojure-prelude
-- https://www.fpcomplete.com/blog/2015/05/haskell-at-front-row
-- https://adambard.com/blog/core-typed-vs-haskell/
+- <http://martintrojer.github.io/beyond-clojure/2016/04/19/beyond-clojure-prelude>
+- <https://www.fpcomplete.com/blog/2015/05/haskell-at-front-row>
+- <https://adambard.com/blog/core-typed-vs-haskell/>
 
 Where I think clojure is good though is as a stepping stone to haskell/purescript.  If you're coming from the imperative
 world, clojure will be a bumpy ride, but not as bumpy (I think) as if you came straight to haskell.  The reason is that
