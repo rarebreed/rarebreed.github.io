@@ -227,18 +227,18 @@ here's some of my own encounters.
 
 In haskell, it's pretty common to do something like this
 
-```haskell
+{% highlight haskell %}
 headNtail :: [a] -> (Maybe a, Maybe [a])
 myhead [] = (Nothing, Nothing)
 myhead (h:[]) = (Just h, Nothing)  
 myhead (h:t) = (Just h, Just t)
-```
+{% endhighlight %}
 
 This example will not work in purescript however.  For starters, there's no syntax sugar for lists.  Secondly,
 what looks like a list (from a haskell perspective) is actually a javascript array.  So you would have to do something
 like this
 
-```haskell
+{% highlight haskell %}
 import Prelude
 import Data.Maybe
 import Data.List
@@ -250,7 +250,7 @@ headNtail :: forall a. List a -> Tuple (Maybe a) (Maybe (List a))
 headNtail Nil = Tuple Nothing Nothing
 headNtail (Cons h Nil) = Tuple (Just h) Nothing
 headNtail (Cons h t) = Tuple (Just h) (Just t)
-```
+{% endhighlight %}
 
 ## Imports, imports and more Imports
 
@@ -264,7 +264,7 @@ and import the Data.Maybe module
 
 ## Record syntax vs. Record vs. Javascript object
 
-```haskell
+{% highlight haskell %}
 -- This is a Record type
 data Person = {name :: String, age :: Int, company :: String}
 
@@ -273,7 +273,7 @@ type OtherPerson = {name :: String, age :: Int, company :: String}
 
 -- This is a literal for a Record instance (which under the covers is a javascript object)
 let p = {name: "Sean", age: 44}
-```
+{% endhighlight %}
 
 # Functions in purescript
 
@@ -281,22 +281,22 @@ The functions in purescript are pretty much what they look like in haskell
 
 ## Recursion tricks
 
-```haskell
+{% highlight haskell %}
 fact :: Int -> Int
 fact 0 = 1
 fact n = n * fact (n - 1)
-```
+{% endhighlight %}
 
 While the above code will work, it will also blow the stack because the recursion is not occurring in the tail call
 position.  So one way to solve this is to have an accumulator
 
-```haskell
+{% highlight haskell %}
 fact :: Int -> Int
 fact n = fact' n n
   where
   fact' acc 0 = acc
   fact' acc n = fact' (acc * n) (n - 1)
-```
+{% endhighlight %}
 
 What is the above doing?  It's making a helper function fact' that uses an accumulator.  We call it like we normally
 think of when doing a factorial (Eg fact 5), but by using the helper fact' functions we can make it tail call recursive.
