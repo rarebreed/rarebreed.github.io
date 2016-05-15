@@ -122,7 +122,27 @@ install something via npm, it will install the module plus dependencies in a fol
 where you ran the command.  That basically means that you  have a local "installation" of the packages.  You can also
 install globally via the -g flag and that will install the packages to a well defined location.
 
-Once that is 
+Once that is done, you can install your other purescript dependencies:
+
+```bash
+sudo npm install -g pulp bower
+```
+
+Pulp is the main build tool for purescript.  Generate a project like this
+
+```bash
+mkdir my-new-project
+cd my-new-project
+pulp init
+```
+
+This will create a directory structure for pulp to work with.  I'm still trying to figure out the best layout hierarchy
+for purescript code.
+
+## Editor for purescript
+
+I've been using [atom][-atom] with the language-purescript and ide-purescript plugins.  It doesn't seem to have an easy
+way to refactor however.   It also seems to be a decent haskell editor as well.
 
 ## Purescript and Javascript types
 
@@ -165,7 +185,7 @@ packages:
 - bower: manages more than javascript dependencies (eg static assets)
 
 
-# The two kinds of javascript programs
+## The two kinds of javascript programs
 
 Thanks to node, javascript isn't relegated to just browser programming.  Javascript can now be in the same position
 that was mostly relegated to languages like bash, python or ruby.  However, there are some fundamental differences
@@ -179,7 +199,7 @@ between programming for the browser, and programming for the local machine.
   - Can use Web Worker API to make the browser run script in a new thread for parallelism
 - How packages are found and loaded seems to be different
 
-# Tooling for purescript
+## Tooling for purescript
 
 Purescript lives in a more opinionated world.  For dependency management, it uses bower, and it generates CommonJS style
 packages.  Because of this, for purescript packages use
@@ -191,9 +211,10 @@ packages.  Because of this, for purescript packages use
 Instead of npm install.  However, that doesn't mean you can't use npm to download packages, but it means you'll have to
 do FFI and perhaps load/require the code differently.
 
-# Differences with haskell
+## Differences with haskell
 
-There's already a good write up of the differences on the purescript wiki, but here's some of my own encounters.
+There's already a good write up of the [differences between purescript and haskell][-diff] on the purescript wiki, but
+here's some of my own encounters.
 
 - No syntactic sugar for lists
 - No syntactic sugar for tuples (and tuples are pairs only...no 3+ element tuples)
@@ -217,7 +238,7 @@ This example will not work in purescript however.  For starters, there's no synt
 what looks like a list (from a haskell perspective) is actually a javascript array.  So you would have to do something
 like this
 
-```purescript
+```haskell
 import Prelude
 import Data.Maybe
 import Data.List
@@ -231,7 +252,7 @@ headNtail (Cons h Nil) = Tuple (Just h) Nothing
 headNtail (Cons h t) = Tuple (Just h) (Just t)
 ```
 
-# Imports, imports and more Imports
+## Imports, imports and more Imports
 
 It seems like purescript doesn't include much by default even in its Prelude.  Also, it's a little weird trying to
 find where for example Array or Maybe definitions are.  So here's what I've been doing so far.
@@ -241,9 +262,9 @@ something like purescript-lists for List or purescript-maybe for Maybe).  If you
 and see what the module name is.  For example, if you want to use the Maybe type, you need to install purescript-maybe
 and import the Data.Maybe module
 
-# Record syntax vs. Record vs. Javascript object
+## Record syntax vs. Record vs. Javascript object
 
-```purescript
+```haskell
 -- This is a Record type
 data Person = {name :: String, age :: Int, company :: String}
 
@@ -260,7 +281,7 @@ The functions in purescript are pretty much what they look like in haskell
 
 ## Recursion tricks
 
-```purescript
+```haskell
 fact :: Int -> Int
 fact 0 = 1
 fact n = n * fact (n - 1)
@@ -269,7 +290,7 @@ fact n = n * fact (n - 1)
 While the above code will work, it will also blow the stack because the recursion is not occurring in the tail call
 position.  So one way to solve this is to have an accumulator
 
-```purescript
+```haskell
 fact :: Int -> Int
 fact n = fact' n n
   where
@@ -287,7 +308,7 @@ think of when doing a factorial (Eg fact 5), but by using the helper fact' funct
    - Remember, you cant add a log or print function in purescript as that will render it impure
 3. Need to figure out Applicatives and Monads
 4. How to do FFI since I will be doing a lot of stuff client side.
-5.
+5. Websockets (especially client API) in purescript
 
 
 [-purescript]: http://purescript.org
@@ -321,3 +342,6 @@ think of when doing a factorial (Eg fact 5), but by using the helper fact' funct
 [-cljtype]: https://github.com/clojure/core.typed
 [-direct-linking]: http://clojure.org/reference/compilation#directlinking
 [-stack]: http://docs.haskellstack.org/en/stable/README/
+[-atom]: http://atom.io
+[-diff]: https://github.com/purescript/purescript/wiki/Differences-from-Haskell
+[-cockpit]: http://cockpit-project.org
