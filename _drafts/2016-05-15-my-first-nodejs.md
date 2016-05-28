@@ -12,3 +12,9 @@ new file is added to get the file extension.  Eventually I want the application 
 interested parties.
 
 ## Node 101
+
+
+## The Eff Monad
+
+
+## The Aff Monad
