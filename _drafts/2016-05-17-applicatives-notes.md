@@ -19,24 +19,32 @@ For example (+3) returns a value, depending on the parameter it is given.  The f
 Just or Nothing, depending on the value.  In other words, the context is 2 things:
 
 - The 2nd argument supplied to fmap will determine what kind of functor is returned
-- 
+- The context **is** the type
 
-Recall the defintion of a fmap:
+Recall the defintion of a map:
 
 {% highlight haskell %}
-fmap :: (Functor f) => forall a b. (a -> b) -> f a -> f b
+map :: (Functor f) => forall a b. (a -> b) -> f a -> f b
 {% endhighlight %}
 
-This says that fmap takes a function that takes some type a and retunrs a type of b (note that a and b can be of the same type), and 
-another argument which is a functor of type a, and it returns a functor of type b.  An alternative way of seeing this function that might be more useful is to look at it like this:
+This says that map takes a function that takes some type _a_ and returns a type of _b_ (note that _a_ and _b_ can be of
+the same type), and another argument which is a functor of type _a_, and it returns a functor of type _b_).  An
+alternative way of seeing this function that might be more useful is to look at it like this:
 
 {% highlight haskell %}
 fmap :: (Functor f) => forall a b. (a -> b) -> (f a -> f b)
 {% endhighlight %}
 
-This says that fmap takes a regular function (not wrapped in a Functor) that takes a type of regular a and returns a regular b, and returns a function which takes a Functor of a and returns a Functor of b.
+This says that fmap takes a regular function (not wrapped in a Functor) that takes a type of regular a and returns a
+regular b, and returns a function which takes a Functor of a and returns a Functor of b.
 
-But why is that useful?  Before we answer that, lets see some instances of functors where its a stretch to think of them as boxes.
+But why is that useful to think of map like that?  Because of the way it's defined, the function passed to map has to
+take a single arg.  But what if we pass a function that takes more than one argument?  Or a partially applied function?
+
+
+
+Before we answer that, lets see some instances of functors where its a stretch to think of them
+as boxes.
 
 ## Functions as types
 
@@ -50,7 +58,17 @@ getKey k (Map key )
 {% endhighlighting %}
 
 
-## Applicatives
+## Why are functors useful?
+
+So why bother with Functors?  If you think about it, when we first encountered the map function, it was only useful
+when we used it with a list:
+
+```haskell
+map (\x -> x * 2) [1 .. 5]
+```
+
+
+# Applicatives
 
 I think the major part with applicatives is that if a function is wrapped inside a Functor, we cant just use that
 "wrapped inside a functor" function with fmap.  That's where Applicatives come into play
@@ -60,4 +78,24 @@ I think the major part with applicatives is that if a function is wrapped inside
 (replicate) <$> [2,4] <*> ["a","b"]
 {% endhighlight %}
 
-# Defining an instance of an Applicative
+## Defining an instance of an Applicative
+
+
+# Monads
+
+Now we get to Monads!  Some quick notes:
+
+- Monads are sequential
+- Monads allow you to chain or pipeline functions in a way Applicatives can not
+  - The arguments which are lifted in an Applicative are independent of each other
+  - Consequence: You can parallelize Applicatives with apply, but you can not with Monads
+
+Consider this code:
+
+{% highlight haskell %}
+-- map :: forall a b. (Functor f) => (a -> b) -> f a -> fb
+map (\x -> Just x) (1 .. 5)
+-- bind :: forall a b. (Monad m) => m a -> (a -> m b) -> m b
+-- Intuitively, in the first arg, take out the a from the monadic context, and apply it to the 2nd arg.
+bind (1 .. 5) (\x -> [Just x])
+{% endhighlighting %}
