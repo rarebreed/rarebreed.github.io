@@ -110,6 +110,12 @@ directly preceded a function.  It might be possible to hook into the doc/comment
 but a messier but certainly plausible alternative is to simply declare maps in the module.  The key would be the
 function and the value would a second level map containing any metadata we needed.
 
+**UPDATE**
+A thought just occurred to me, that creating a map with the key being the function is not so simple as I thought.  A
+function is first class, but it also has a type.  For example a function of (a -> a -> b) is different from (a -> a) or
+even of (a -> b -> a) because each of these examples are different types.  One possibility might be to extend (r ->)
+with a typeclass?  I'll have to think about this some more.
+
 Generating a xUnit style report might be more difficult.  The only native test framework I have seen for purescript does
 not seem to do this.  I think a more practical approach will be to interface with the [cucumber port][-cuke js] for
 javascript and use FFI to utilize its features (which includes the ability to write a custom formatter for reports).
