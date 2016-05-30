@@ -113,8 +113,20 @@ function and the value would a second level map containing any metadata we neede
 **UPDATE**
 A thought just occurred to me, that creating a map with the key being the function is not so simple as I thought.  A
 function is first class, but it also has a type.  For example a function of (a -> a -> b) is different from (a -> a) or
-even of (a -> b -> a) because each of these examples are different types.  One possibility might be to extend (r ->)
-with a typeclass?  I'll have to think about this some more.
+even of (a -> b -> a) because each of these examples are different types.  Since I want to put a function of different
+arity and arg types, they key would have to be able to handle this.  In Java, an interface **is a** type, and could
+therefore be used to define the type of the key in a Map.  I am not sure if typeclasses are the same way.  Is it
+possible to extend ((->) r) with a typeclass and use a typeclass as the type of the key?  It doesn't seem like you can
+use a typeclass as a data type, but that's what I need.  AFAIK, haskell doesn't have method overloading.  You can't do
+this:
+
+```haskell
+someFunc :: a -> a -> b
+-- Can't do this even though the type is different, you can't have the same function name in the same module
+someFunc :: a -> a -> a -> b
+```
+
+So I suppose I could just make the key the function name since that alone should suffice.
 
 Generating a xUnit style report might be more difficult.  The only native test framework I have seen for purescript does
 not seem to do this.  I think a more practical approach will be to interface with the [cucumber port][-cuke js] for
