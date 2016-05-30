@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "My first node app"
+title:  "Lots of stuff to learn"
 date:   2016-05-20 07:21:40 -0400
 categories: purescript notes testing
 ---
-# Things to do in purescript
+Things to do in purescript
 
 ## Learning
 
