@@ -99,10 +99,6 @@ How many times have you tried to find some tidbit of knowledge, but it took you 
 especially if the documentation is on the web on a public server.  But what about email threads?  Chat logs?  Wikis
 behind some firewall?  Code comment?  Who knows, maybe the info was buried in a log file statement.
 
-How many times have you tried to find some tid bit of knowledge, but it took you hours to find it?  Google is great,
-especially if the documentation is on the web on a public server.  But what about email threads?  Chat logs?  Or wikis
-behind some firewall?
-
 Lucene comes in handy, but sometimes it's still too overwhelming.  For power users, there needs to be a way to search
 for information.  Searching by string is one way to do it (and lucene works great for that), but what if what you are
 seeking is relational in some form?  Perhaps your first thought is to perform some kind of SQL query.  But there's an
