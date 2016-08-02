@@ -138,11 +138,17 @@ proprietary format to some plain text format is possible though.
 
 # The technology stack
 
-This isn't rocket science.  It's basically a database with a web front end.  
+This isn't rocket science (at least for the basics).  It's basically a database with a web front end.  The hardest part
+(though optional) will be integrating emails, chat logs, and log files as searchable information.  This would require
+some natural language processing to extract keywords, and machine learning classification techniques (k-means, linear
+regressions, bayesian rules, etc) to generate graphs.  Graphs and lucene will be the primary search tools
 
 - Arangodb or orientdb for database backend
   - Documents will be linked as a graph database
   - Allow configuration support for clustering HA mode
+  - Separate machine learning library
+  - Separate graph querying library
+- Lucene (or Solr) support
 - Web front end
   - Front end in purescript using halogen (react-like FRP)
   - Websocket (either do FFI using node's socket.io or purescript-websocket)
