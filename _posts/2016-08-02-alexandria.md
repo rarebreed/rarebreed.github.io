@@ -29,6 +29,7 @@ In a software project of moderate size, it becomes very useful to document in a 
 
 ## Rationale
 
+<<<<<<< HEAD
 There are basically 2 problems to tackle:
 
 1. **Generating information useable for others**
@@ -41,6 +42,20 @@ The two points above are somewhat interrelated.  First off, it can be a pain for
 owners, upstream community members or any other number of people to simply author some documentation.  Is it possible to
 make documentation actually....gasp...fun?  Or at least a little less agony or boredom inducing?  The second problem is
 that documentation is often buried all over the place.  It could be in email threads, chat logs, comments in code, etc.
+=======
+I really haven't seen any product that addresses these kinds of document needs that can be used both at the enterprise
+and open source level.  Also, these systems just kind of dump static documentation with live or dynamic documentation.
+While all documentation is dynamic in the sense that it can go through revisions over time, some kind of documentation
+is spurred by active comments and participation.
+
+There are basically 2 problems to tackle:
+1. Generating information useable for others
+2. Finding information you need
+
+The two points above are somewhat interrelated.  First off, it can be a pain for developers, test engineers, product
+owners, upstream community members or any other number of people to simple author some documentation.  Is it possible to
+make documentation actually....gasp...fun?  Or at least a little less agony or boredom inducing?  The second problem is
+that documentation is often buried all over the place.  It could be in email threads, chat logs, comments in code, etc
 etc.  What good is the information age if you can't find the info you're looking for??  That's like having a vault of
 billions in gold with no key to unlock it.  Useless.
 
@@ -99,6 +114,10 @@ How many times have you tried to find some tidbit of knowledge, but it took you 
 especially if the documentation is on the web on a public server.  But what about email threads?  Chat logs?  Wikis
 behind some firewall?  Code comment?  Who knows, maybe the info was buried in a log file statement.
 
+How many times have you tried to find some tid bit of knowledge, but it took you hours to find it?  Google is great,
+especially if the documentation is on the web on a public server.  But what about email threads?  Chat logs?  Or wikis
+behind some firewall?
+
 Lucene comes in handy, but sometimes it's still too overwhelming.  For power users, there needs to be a way to search
 for information.  Searching by string is one way to do it (and lucene works great for that), but what if what you are
 seeking is relational in some form?  Perhaps your first thought is to perform some kind of SQL query.  But there's an
@@ -126,6 +145,7 @@ This document system I propose should be able to do the following:
 - *natural language processing* for email threads, chat conversations and logging files
 
 \* Not sure about these since (especially NLP due to difficulty) but these would be very nice to have
+
 
 Generally, alexandria is about plain text documentation with a few exceptions.  First, simply due to its ubiquity, it
 will need to support importing of Word docs.  The same is true for google docs.  It must also support storage of visual
