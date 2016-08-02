@@ -162,6 +162,7 @@ This isn't rocket science.  It's basically a database with a web front end.
 **Entities:**
 
 Document- A user story, requirement, test case, test plan, article, design note, etc.  A document will be a graph node
+
   - Content- the actual information of a document
   - Edge- A Document type will have a link, which is just a reference to another document, or to a project
   - Project- the code repository
