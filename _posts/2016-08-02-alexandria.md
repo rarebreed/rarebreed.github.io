@@ -161,14 +161,12 @@ This isn't rocket science.  It's basically a database with a web front end.
 
 **Entities:**
 
-Document- A user story, requirement, test case, test plan, article, design note, etc.  A document will be a graph node
-
+- Document- A user story, requirement, test case, test plan, article, design note, etc.  A document will be a graph node
   - Content- the actual information of a document
   - Edge- A Document type will have a link, which is just a reference to another document, or to a project
   - Project- the code repository
   - Author- the user who generates, edits or reads documents
-
-Library- alexandria's data server.  It holds the actual content data files
-Catalog- alexandria's database.  These hold all the data entities (not the content but the graphs and edges)
-Librarian- The service that performs querying and searching of different types of data
-Requester- The message bus that connects clients to the Librarian
+- Library- alexandria's data server.  It holds the actual content data files
+- Catalog- alexandria's database.  These hold all the data entities (not the content but the   graphs and edges)
+- Librarian- The service that performs querying and searching of different types of data
+- Requester- The message bus that connects clients to the Librarian
