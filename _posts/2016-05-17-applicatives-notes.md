@@ -4,7 +4,7 @@ title:  "My first node app"
 date:   2016-05-15 02:19:40 -0400
 categories: purescript notes
 ---
-**This post is a Work in progess** 
+**This post is a Work in progess**
 
 I think I've finally wrapped my head around functors in haskell/ps.  I kind of had two a-ha moments.  Usually when you
 see tutorials about functors online, you'll hear them say that Functor is like a box that holds some value.  Problem is
