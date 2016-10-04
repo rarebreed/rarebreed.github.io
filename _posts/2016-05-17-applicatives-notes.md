@@ -4,6 +4,8 @@ title:  "My first node app"
 date:   2016-05-15 02:19:40 -0400
 categories: purescript notes
 ---
+**This post is a Work in progess** 
+
 I think I've finally wrapped my head around functors in haskell/ps.  I kind of had two a-ha moments.  Usually when you
 see tutorials about functors online, you'll hear them say that Functor is like a box that holds some value.  Problem is
 that doesn't hold up that well when you think about 2 major applications for Functors:  IO and functions.  Moreover,
@@ -50,7 +52,7 @@ a type constructor for a function.
 {% highlight haskell %}
 getKey :: k -> Map k v -> Maybe v
 getKey k (Map key )
-{% endhighlighting %}
+{% endhighlight %}
 
 
 ## Applicatives
@@ -78,13 +80,14 @@ value is optional, Either is used when you indicate an error, and functions yiel
 that is given.  This is what they mean when they say a functor has a computational context.  Depending on which functor
 type is being used, the computation may differ.  Think of this sort of like a polymorphic method.  
 
-```haskell
+{% highlight haskell %}
 -- a Maybe type
 (+) <$> (*5) <*> Just 20
-```
+{% endhighlight %}
+
 ## why does this work?
 
-```haskell
+{% highlight haskell %}
 import Prelude
 import Data.Array
 import Data.Maybe
@@ -93,4 +96,4 @@ import Data.Maybe
 -- map :: forall f. (Functor f) => (a -> b) -> (f a -> f b)
 -- apply :: forall f. (Functor f) => f (a -> b) -> f a -> f b
 -- This is the same as: apply (apply [(+), (*)] [Just 3]) [Just 5]
-```
+{% endhighlight %}
