@@ -4,16 +4,45 @@ title:  "My first node app"
 date:   2016-05-15 02:19:40 -0400
 categories: purescript notes
 ---
-I think I've finally wrapped my head around functors in haskell/ps.  I kind of had two a-ha moments.  Usually when you
-see tutorials about functors online, you'll hear them say that Functor is like a box that holds some value.  Problem is
-that doesn't hold up that well when you think about 2 major applications for Functors:  IO and functions.
+# Algebra
 
-# The context of a functor
+Before understanding what a monoid is, it is helpful to understand the term _algebra_.  _Algebras_ are the branch of
+mathematics that studies symbols and the rules for manipulating symbols.  If we think of a symbol as an operation on an
+element of a set, then we can unify this with programming a little better.  When we say that we are studying the
+operations on a set, we can also interpret this as studying the properties of functions on a type.  Notice I said the
+study of a symbol as an _operation_ (function) on an _element of a set_ (or a value of a type).  Consider the basic
+properties that we all learned in basic algebra
+
+Associativity:  (a + b) + c = a + (b + c)
+Commutativity:  a * b * c = c * b * a
+Distributive:   a * b + a * c = a(b + c)
+
+Notice that I used addition (+) and multiplication (\*) because the operations have those properties.  Division and
+subtraction however do not share these properties.  Just as we can study how operations on numbers work, we can also
+study how functions on types work.  
+
+# Monoids
+
+Monoids are a typeclass-as-algebra.  They have certain properties, and by knowing these properties, we can have certain
+types implement the Monoid typeclass.  Monoids are useful if we have a type
+
+# Functors
+
+Functors at their core are a (type)class with which you can map a function over.   Usually when you see tutorials about
+functors online, you'll hear them say that Functor is like a box that holds some value.  Problem is that doesn't hold up
+that well when you think about 2 major applications for Functors:  IO and functions.
+
+## The context of a functor
 
 When you see it explained that functors are a "box" that holds some value, that analogy really only holds in some kinds
 of functors.  For example, what is the "box" when you consider that a function type is a Functor?  What is the box when
 you consider IO as a functor (is it the outside world)?  The better analogy is that a functor has or rather needs a
-context.
+context.  But what exactly does "context" mean here?
+
+Let's examine what a context is.  If you say "It depends on the context", then that means that "it" changes meaning
+based on the surrounding environment or information.  In our case with monads, "it" is our pure value, and the
+surrounding environment or information is the monadic type.  Moreover, each monadic type is suited to encapsulate this
+extra information.  For example, the Maybe type represents the context that might have a failure, the Either
 
 For example (+3) returns a value, depending on the parameter it is given.  The functor (Just "foo") may return a new
 Just or Nothing, depending on the value.  In other words, the context is 2 things:
