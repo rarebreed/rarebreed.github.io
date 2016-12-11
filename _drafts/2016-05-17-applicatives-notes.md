@@ -1,19 +1,48 @@
 ---
 layout: post
-title:  "My first node app"
+title:  "Notes on Functors, Applicatives and Monads"
 date:   2016-05-15 02:19:40 -0400
 categories: purescript notes
 ---
-I think I've finally wrapped my head around functors in haskell/ps.  I kind of had two a-ha moments.  Usually when you
-see tutorials about functors online, you'll hear them say that Functor is like a box that holds some value.  Problem is
-that doesn't hold up that well when you think about 2 major applications for Functors:  IO and functions.
+I think I finally understand why haskell has Functors, Applicatives and Monads.  The a-ha moment came to me when I
+realized that pure functional languages don't try to forbid impurity, they just make it very clear which functions are
+pure, and which are not.  In fact, not just which functions are (im)pure, but which part(s) of the function are.  It is
+not possible to have a useful program without side effects of some sort.  So what a pure functional language like
+haskell or purescript does is tell you which parts of the program are pure or not.
 
-# The context of a functor
+This has several implications.  The first is that being pure or not is declared as part of its type.  In other words, by
+looking at the type, you can tell if it is pure or not.  This means that we know how to compose functions together due
+to their type.  Another consequence of this is that impurity is "contagious".  Any function calling an impure function
+also becomes impure.  The trick is that impure functions can have or contain pure functions.  Indeed, this is what
+the goal is in pure functional languages: isolating the pure from the impure.  
+
+This isolation, or encapsulation if you will, of purity in a sea of impurity gives us some benefits.  It means that we
+can prove our pure parts of the function and know that they are always correct.  It is the impure parts where we can
+focus our testing efforts due to their non-determinism.
+
+So what does this have to do with Functions, Applicatives and Monads (FAM)?  As I mentioned before, the purity of a
+function is indicated by its type.  But how is a Functor impure?  Perhaps we can say that the Maybe type is impure as
+it represents the possibility of not having an answer.  But what a function?  A function is a Functor, but a function
+can also be impure.  What about a List?  A List supports the Functor protocol, so how is it "impure"?  These notes are
+in some ways an attempt to answer that question.
+
+# Functors
+
+Functors at their core are a (type)class with which you can map a function over.   Usually when you see tutorials about
+functors online, you'll hear them say that Functor is like a box that holds some value.  Problem is that doesn't hold up
+that well when you think about 2 major applications for Functors:  IO and functions.
+
+## The context of a functor
 
 When you see it explained that functors are a "box" that holds some value, that analogy really only holds in some kinds
 of functors.  For example, what is the "box" when you consider that a function type is a Functor?  What is the box when
 you consider IO as a functor (is it the outside world)?  The better analogy is that a functor has or rather needs a
 context.  But what is a "context"?  Let's look at some examples.
+
+Let's examine what a context is.  If you say "It depends on the context", then that means that "it" changes meaning
+based on the surrounding environment or information.  In our case with monads, "it" is our pure value, and the
+surrounding environment or information is the monadic type.  Moreover, each monadic type is suited to encapsulate this
+extra information.  For example, the Maybe type represents the context that might have a failure, the Either
 
 For example (+3) returns a value, depending on the parameter it is given.  The functor (Just "foo") may return a new
 Just or Nothing, depending on the value.  In other words, the context is 2 things:
@@ -36,12 +65,20 @@ fmap :: (Functor f) => forall a b. (a -> b) -> (f a -> f b)
 {% endhighlight %}
 
 This says that fmap takes a regular function (not wrapped in a Functor) that takes a type of regular a and returns a
-regular b, and returns a function which takes a Functor of a and returns a Functor of b.
+regular b, and returns a function which takes a Functor of a and returns a Functor of b. But why is that useful to think
+of map like that?  
 
-But why is that useful to think of map like that?  Because of the way it's defined, the function passed to map has to
-take a single arg.  But what if we pass a function that takes more than one argument?  Or a partially applied function?
+Think again of what I said earlier that pure functional languages take islands of purity and surround it with a sea of
+impurity.  So take a look at that alternative definition again.  It's saying "take a pure function of type a -> b, and
+give me a new function of (f a) -> (f b)".  This (f a) -> (f b) sure looks a lot like a -> b doesn't it?  That's
+because in many ways, they are the same.  What has changed is that the Functor f holds some extra information, but it
+still carries the mapping of a to b.  The magic then is _what is this extra information_?  As explained earlier, the
+type (which implements the Functor) _is_ the extra information (or context).
 
 ## Applicatives are a special kind of Functor
+
+Because of the way it's defined, the function passed to map has to take a single arg.  But what if we pass a function
+that takes more than one argument?  Or a partially applied function?
 
 Recall that map takes a function that takes a single argument.  But what if we need to pass in a multi-arg function?
 The easiest solution is to pass in a partially applied function.  But an even more useful trick is available if we
@@ -49,13 +86,16 @@ expand our definition of Functor by creating a new type class called an Applicat
 
 Imagine that we have a function:
 
+**TODO**
+*Show how to lift a pure function which normally only takes pure values into a function which can take Applicatives.*
+
 ```haskell
 type Company = String
 type Employee = String
 type Roster = Map Employee Company
 
 setEmployee :: Employee -> Company -> Roster -> Roster
-setEmployee e c r =
+
 ```
 
 ## Functions as types
@@ -133,6 +173,9 @@ x 10 -- [20, 40, 60]
 
 Now we get to Monads!  Some quick notes:
 
+- Monads are an abstraction (really a typeclass) for side effects
+- Monads have a relationship with *do* notation.  
+- There is a difference between computational side effects, and native side effects
 - Monads are useful for sequential operations
 - Monads allow you to chain or pipeline functions in a way Applicatives can not
   - The arguments which are lifted in an Applicative are independent of each other
@@ -165,3 +208,28 @@ a + b = b + a.
 
 **TODO**
 _why is this so?  Explain with some examples how Applicatives have no dependency on arguments but monads can_
+
+## Relationship with do notation
+
+Let's examine the code example given in the book:
+
+{% highlight haskell %}
+import Prelude
+import Data.Array
+
+countThrows :: Int -> Array (Array Int)
+countThrows n = do
+  x <- 1 .. 6
+  y <- 1 .. 6
+  if x + y == n
+    then return [x, y]
+    else empty
+
+-- The above is equivalent to this:
+countThrows' :: Int -> Array (Array Int)
+countThrows' n =
+  (1 .. 6) >>= \x ->
+  (1 .. 6) >>= (\y -> if x + y == n
+                          then return [x,y]
+                          else [])
+{% endhighlight %}
