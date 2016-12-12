@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Notes on Functors, Applicatives and Monads"
+title:  "What are Functors, Applicatives and Monads good for?"
 date:   2016-05-15 02:19:40 -0400
 categories: purescript notes
 ---
