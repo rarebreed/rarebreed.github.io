@@ -111,7 +111,7 @@ different kind types:
 * -> * -> *  -- a type constructor that takes to parameters, etc
 \# !  -- (purescript only) a row of effect types
 \# * -- a row of types (ie, a record)
-{% endhighlighting %}
+{% endhighlight %}
 
 Since a function is a type (really, it's an element of a morphism in a category), that means that when a function takes
 another function as an argument, the passed in function must have the same type required by the calling function.
@@ -119,7 +119,7 @@ another function as an argument, the passed in function must have the same type 
 {% highlight haskell %}
 getKey :: k -> Map k v -> Maybe v
 getKey k (Map key )
-{% endhighlighting %}
+{% endhighlight %}
 
 
 ## Why are functors useful?
@@ -164,10 +164,10 @@ if the program fails, the failure must have occurred in an impure part of the pr
 By lifting pure parts of the computation into a larger context that is impure (for example with side effects like IO or
 mutated data structures), we can still clearly delineate these pure and impure parts.  Let's look at some examples
 
-```haskell
+{% highlight haskell %}
 map (_ + 3) (Just 10)  -- Just 13
 x 10 -- [20, 40, 60]
-```
+{% endhighlight %}
 
 # Monads
 
@@ -193,7 +193,7 @@ apply [(\x -> x * 2)] [5, 10]
 -- bind :: forall a b. (Monad m) => m a -> (a -> m b) -> m b
 -- Intuitively, in the first arg, take out the a from the monadic context, and apply it to the 2nd arg.
 bind (1 .. 5) (\x -> [Just x]) -- Since the monad is an array (of type a), what we return has to be an array (of type b)
-{% endhighlighting %}
+{% endhighlight %}
 
 So, how come we can chain together Monads, but not Applicatives?  Because of the types.  As you can see, a Monad must
 support the bind operation.  If you look at the type of bind, the return type is (or rather can be) of the same time
