@@ -40,9 +40,11 @@ you consider IO as a functor (is it the outside world)?  The better analogy is t
 context.  But what is a "context"?  Let's look at some examples.
 
 Let's examine what a context is.  If you say "It depends on the context", then that means that "it" changes meaning
-based on the surrounding environment or information.  In our case with monads, "it" is our pure value, and the
-surrounding environment or information is the monadic type.  Moreover, each monadic type is suited to encapsulate this
-extra information.  For example, the Maybe type represents the context that might have a failure, the Either
+based on the surrounding environment or information.  In our case with functor types, "it" is our pure value, and the
+surrounding environment or information is the functor type.  Moreover, each functor type is suited to encapsulate this
+extra information.  For example, the Maybe type represents the context that might have a failure, the Either functor
+says that the Left side is an error of some sort, and the Right is a valid value.  Remember that Monads _are_ Functors
+as well, so all the above applies to Monads.
 
 For example (+3) returns a value, depending on the parameter it is given.  The functor (Just "foo") may return a new
 Just or Nothing, depending on the value.  In other words, the context is 2 things:
@@ -50,7 +52,7 @@ Just or Nothing, depending on the value.  In other words, the context is 2 thing
 - The 2nd argument supplied to fmap will determine what kind of functor is returned
 - The context **is** the type (in the above example, a function type, and a Maybe type)
 
-Recall the defintion of a map:
+Recall the defintion of the map function:
 
 {% highlight haskell %}
 map :: (Functor f) => forall a b. (a -> b) -> f a -> f b
@@ -61,7 +63,7 @@ the same type), and another argument which is a functor of type _a_, and it retu
 alternative way of seeing this function that might be more useful is to look at it like this:
 
 {% highlight haskell %}
-fmap :: (Functor f) => forall a b. (a -> b) -> (f a -> f b)
+map :: (Functor f) => forall a b. (a -> b) -> (f a -> f b)
 {% endhighlight %}
 
 This says that fmap takes a regular function (not wrapped in a Functor) that takes a type of regular a and returns a
@@ -83,6 +85,22 @@ that takes more than one argument?  Or a partially applied function?
 Recall that map takes a function that takes a single argument.  But what if we need to pass in a multi-arg function?
 The easiest solution is to pass in a partially applied function.  But an even more useful trick is available if we
 expand our definition of Functor by creating a new type class called an Applicative.  
+
+Applicatives are useful in the situation where you have a "regular" function (ie a pure function) taking regular value
+types.  But what if instead of a pure value, you only have another FAM type (Functor, Applicative, Monad)?  This is
+where lifting comes in handy.  You lift the pure function to be applied to "impure" values.  If your pure function only
+has a single parameter, then you can simply fmap it.  But if the pure function takes multiple arguments, then this is
+where Applicatives come in handy.  Recall the type definition of apply:
+
+{% highlight haskell %}
+apply :: forall f. (Applicative f) => f (a -> b) -> f a -> f b
+(<\*>) = apply
+{% endhighlight %}
+
+Notice that this definition looks very similar to fmap, the difference being that instead of taking a regular function
+type (a -> b), we have a function wrapped inside the Applicative.  How is that useful?  If you have a function that has
+multiple arguments, say for example 2 args like foo :: a -> b -> c, that can also be expressed due to currying as
+a -> (b -> c).   
 
 Imagine that we have a function:
 
