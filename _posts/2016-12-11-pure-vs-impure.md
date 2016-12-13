@@ -49,7 +49,7 @@ as well, so all the above applies to Monads.
 For example (+3) returns a value, depending on the parameter it is given.  The functor (Just "foo") may return a new
 Just or Nothing, depending on the value.  In other words, the context is 2 things:
 
-- The 2nd argument supplied to fmap will determine what kind of functor is returned
+- The 2nd argument supplied to map will determine what kind of functor is returned
 - The context **is** the type (in the above example, a function type, and a Maybe type)
 
 Recall the defintion of the map function:
@@ -66,7 +66,7 @@ alternative way of seeing this function that might be more useful is to look at 
 map :: (Functor f) => forall a b. (a -> b) -> (f a -> f b)
 {% endhighlight %}
 
-This says that fmap takes a regular function (not wrapped in a Functor) that takes a type of regular a and returns a
+This says that map takes a regular function (not wrapped in a Functor) that takes a type of regular a and returns a
 regular b, and returns a function which takes a Functor of a and returns a Functor of b. But why is that useful to think
 of map like that?  
 
@@ -89,7 +89,7 @@ expand our definition of Functor by creating a new type class called an Applicat
 Applicatives are useful in the situation where you have a "regular" function (ie a pure function) taking regular value
 types.  But what if instead of a pure value, you only have another FAM type (Functor, Applicative, Monad)?  This is
 where lifting comes in handy.  You lift the pure function to be applied to "impure" values.  If your pure function only
-has a single parameter, then you can simply fmap it.  But if the pure function takes multiple arguments, then this is
+has a single parameter, then you can simply map it.  But if the pure function takes multiple arguments, then this is
 where Applicatives come in handy.  Recall the type definition of apply:
 
 {% highlight haskell %}
@@ -97,7 +97,7 @@ apply :: forall f. (Applicative f) => f (a -> b) -> f a -> f b
 (<\*>) = apply
 {% endhighlight %}
 
-Notice that this definition looks very similar to fmap, the difference being that instead of taking a regular function
+Notice that this definition looks very similar to map, the difference being that instead of taking a regular function
 type (a -> b), we have a function wrapped inside the Applicative.  How is that useful?  If you have a function that has
 multiple arguments, say for example 2 args like foo :: a -> b -> c, that can also be expressed due to currying as
 a -> (b -> c).   
@@ -127,8 +127,8 @@ different kind types:
 * -- a fully qualified, ie concrete, type
 * -> * -- a function type.  Since a constructor is a function, this can be seen as a Type that takes one parameter
 * -> * -> *  -- a type constructor that takes to parameters, etc
-\# !  -- (purescript only) a row of effect types
-\# * -- a row of types (ie, a record)
+# !  -- (purescript only) a row of effect types
+# * -- a row of types (ie, a record)
 {% endhighlight %}
 
 Since a function is a type (really, it's an element of a morphism in a category), that means that when a function takes
@@ -153,7 +153,7 @@ map (\x -> x * 2) [1 .. 5]
 # Applicatives
 
 I think the major part with applicatives is that if a function is wrapped inside a Functor, we cant just use that
-"wrapped inside a functor" function with fmap.  That's where Applicatives come into play
+"wrapped inside a functor" function with map.  That's where Applicatives come into play
 
 {% highlight haskell %}
 (+) <$> [10,20] <*> [3,4]
