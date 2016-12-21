@@ -37,7 +37,7 @@ than python as it's on par with [pypy][-pypy] speed.  Related to this is memory 
 will use about half a gig of memory even if you set -Xmx=256.  That's because once you add in [metaspace][-metaspace]
 and [stack space][-ss] (per thread), the memory usage will balloon up quite a bit.  Javascript should take a lot less.
 
-Thirdly, and related to the first point, we need a java binding for dbus.  Although a [Java library exists][-jdbus] for,
+Thirdly, and related to the first point, we need a js binding for dbus.  Although a [Java library exists][-jdbus] for,
 dbus, it is unmaintained and relatively complicated.  If anything can rival Java in terms of available libraries, it's
 javascript and python.  In this specific case, the [javascript dbus library][-dbus-native] just seems to work (even if
 the documentation is somewhat lacking). Since our new project will be testing a [web based application][-cockpit], it
@@ -47,8 +47,8 @@ java, it's javascript.
 Fourthly, purescript is pure.  Not even clojure(script) is as functional.  This means we have stronger safety guarantees
 and can refactor code more easily.  Just as clojure expanded how I think about programming through macros and immutable
 data, haskell/purescript makes me consider programming even more deeply by being forced to think about types and type
-classes, the algebras of functions, and being forced to think about pure vs impure functions.  Why is it important to be
-functionally pure?  During my work on [pheidippides][-phei] (written in clojure), I ran into a lot of problems during
+classes, the algebras of typeclasses, and being forced to think about pure vs impure functions.  Why is it important to
+be functionally pure?  During my work on [pheidippides][-phei] (written in clojure), I ran into a lot of problems during
 refactoring.  I would change some part of the code and then everything would fall apart, sometimes at runtime. I also
 ran into null/nil hell.  Clojure does nothing to protect you from passing in wrong types including null values.
 
@@ -66,12 +66,32 @@ so far, I like purescript more for a couple of reasons:
   - types help you understand the code better
   - Maybe solves null hell
 
+clojurescript does have 3 things going for it though:
+
+- It's more stable than purescript
+- It's easier to learn and do
+- the FFI with javascript is easier
+
+As for the stability part, all languages evolve.  Purescript just evolves more rapidly, so I am not terribly concerned
+with his weakness.  Since I already know clojure well, learning clojurescript isnt that much of a stretch.  Also, since
+it is a dynamic language, you dont have to (initially) think about types.  But the problem is that ultimately, you do
+have to think about types in any programming you do.  Dynamic languages just makee this concern implicit and in some
+cases deferred.  That said, purescript **is** a hard language.  But learning it pays off in spades, because it forces
+you to think in abstract terms.  It also forces you to consider what is pure and impure, and as a result, makes you
+want to make pure functions whenever you can.  While this disadvantage is more serious, I think it also comes with
+benefits that clojure(script) can't provide, and is therefore worth the steep learning curve.  Finally, doing FFI with
+purescript is a bit harder.  You have to write "glue code" that gets exported into your purescript module.  Ths is
+necessary to manually determine pure and impure foreign functions or data.  Since clojurescript is not a pure language
+it does not have to manually consider what is pure or not and dos not need to do this.  Again, this "disadvantage" is
+debatable.
+
 I don't know enough about purescript's [continuation monad][-cont-monad] to compare with clojure's [core.async][-async].
 However, it should be a cleaner way to handle callback hell than regular javascript (though ES6 itself now has several
 solutions to callback hell including generators and promises)
 
 One may also ask why not chose [elm][-elm]?  It has a haskell-like syntax as well.  I mainly focused on purescript
-because elm seems to be focused on GUI apps with its flavor of FRP.
+because elm seems to be focused on GUI apps with its flavor of FRP.  Also, elm does not support typeclasses which seems
+like a huge minus to me.
 
 Another good reason to chose purescript is that it's not terribly hard to sell javascript to a company.  Sure, the real
 language is a haskell dialect, but it ultimately compiles to human readable javascript.  Java has gotten some stiff
@@ -143,8 +163,8 @@ What I am discovering about haskell's type system is why they call it Algebraic 
 Algebra or Modern Algebra in college, you'll start to see why.  For example, purescript has Semigroups and Rings.  A
 SemiGroup for example must support the append operation.  Why is this important?  What good does Type Theory bring to
 programming?  I just want to code!!  The reason you should learn these things is because they help you reason about
-your program.  They help you understand which parts of your code are composable with other, and how to make them
-composable with each other.  Composing functions is really THE hallmark of functional programming the more I think
+your program.  They help you understand which parts of your code are composeable with other, and how to make them
+composeable with each other.  Composing functions is really **the** hallmark of functional programming the more I think
 about it.  Immutable data, functions as first class citizens, isolating impure from pure code, all of these things are
 really about being able to compose functions together.
 

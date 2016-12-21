@@ -11,12 +11,14 @@ It takes more than knowing how to program to be a good engineer.  Here, I will d
 This is a huge topic in and of itself, but here I will go over haskell style of functional programming
 
 - Algebras (Functors, Applicatives, Monads)
-- Type Theory (read Bartosz Milewskis articles)
+- Category Theory (read Bartosz Milewskis articles)
 - Recursion/Corecursion
+- Monad uses and composition
+- Composition of data types
 
 ## Data Structures
 
-I want to b able to design my own persistent data structures including the following:
+I want to be able to design my own persistent data structures including the following:
 
 - Red Black Trees
 - Finger Trees
@@ -30,15 +32,17 @@ These are the basic fundamentals of computer science.  Knowledge in this area gi
 space time efficiencies of data structures and the algorithms that work on them.  For the above data structures, one
 should be able to do the following:
 
-- traversal (going through all elements one by one)
-  - mapping (applying a function to all elements)
-  - folding
+- traversal (going through all elements of a data structure one by one)
+- mapping (applying a function to all elements)
+- folding
 - searching (does an item exist in this structure)
 - sorting (order elements on some criteria)
 - adding new items
 - deleting items
 - balancing (preserving runtime efficiency)
 - comparing (are 2 structures equivalent)
+- commonality
+- best fit
 
 # Concurrency and parallelism
 
@@ -57,7 +61,7 @@ the future, there will (hopefully) be a 2nd way of doing parallelism when js sha
 - purescript-aff for asynchronous or delayed computations
 - node cluster
 
-## java
+## Java
 
 Java 8's concurrency story has improved with java 8.  It has become more monadic
 
@@ -67,7 +71,7 @@ Java 8's concurrency story has improved with java 8.  It has become more monadic
 - parallel streams
 - JavaRx (reactive for java)
 
-## javascript (ES6)
+## Javascript (ES6)
 
 Javascript mostly runs in a single thread, with the exception of web workers and node's cluster.  Since js is normally
 single threaded most of the time you need to worry about concurrency rather than true parallelism (SIMD is another
@@ -82,6 +86,8 @@ defer the result of a computation, and coroutines allow a function to be re-ente
 One may wonder why you would ever need to learn how to parse some syntax.  Afterall, thats what regexes are for right?
 But it is a valuable skill to learn.  If you ever need to be able to parse structured data that is not a standard
 format like yaml or json, what do you do?
+
+For example, I would like to create a modified gherkin syntax parser such that I can extract desired elements from it.
 
 ## Grammar types
 
@@ -167,8 +173,8 @@ libraries, and other idiosyncracies.
 - profiling jmeter,jmx
 
 ## Purescript/Javascript
-Lots of work here.  Bower and pulp are the defacto build tools.  Need to learn more javascript libraries, and how to
-debug javascript apps.
+
+Lots of work here.  Need to learn more javascript libraries, and how to debug javascript apps.
 
 - purescript-aff for asynchronous effects
 - purescript-react for web front end state modelling
@@ -177,7 +183,7 @@ debug javascript apps.
 
 ## Haskell
 
-Haskell is kind of in the same boat as purescript.  Stack is their build tool and i need to get familiar with the
+Haskell is kind of in the same boat as purescript.  Stack is their build tool and I need to get familiar with the
 standard libraries and hoogle.
 
 # Networking fundamentals
