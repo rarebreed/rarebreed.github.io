@@ -14,7 +14,7 @@ maybe reading one of the Alfred Hitchcock and the Three Investigators books.
 
 # Roleplaying
 
-Recently, I've been on a tear buying roleplaying games, mostly due to some good deals on bundleofolding.com.  I've
+Recently, I've been on a tear buying roleplaying games mostly due to some good deals on bundleofholding.com.  I've
 recently bought the following:
 
 - Call of Cthulhu 7th edition
@@ -27,14 +27,14 @@ recently bought the following:
 Why so many?  I've always had a place in my heart for roleplaying games.  Being a nerdy and shy kid, it was to me the
 best way to explore.  I owe alot to RPG's.  Lately, I have (re)started work on a long abandon game design which I am
 beginning to implement in purescript.  Roleplaying game design (theory?) has changed a lot since I last played in the
-early 90s; some for the better, some for the worse.  Most of the games above are "old school" systems.  Indeed,
+early 90s; some for the better, some for the worse (IMHO).  Most of the games above are "old school" systems.  Indeed,
 Runequest was one of the original competitors to Dungeons & Dragons back in the day.  What I have noticed in more recent
 games, is a move away from "crunchy" rules, to "lite" games that are very narrative and storytelling focused rather
 than simulation focused.  
 
 For me, these games will be used as motivational inspiration for Dao (my game system and world)
 
-# Taiqi
+# Internal martial arts
 
 A few week ago, I bought several books from YMAA.  I have bought some of Dr. Yang's books before
 
@@ -45,12 +45,7 @@ A few week ago, I bought several books from YMAA.  I have bought some of Dr. Yan
 - Taichi Qigong
 - Taichi of Yang style
 
-
-# Diet books
-
-- DASH Weight Loss
-- DASH Younger you
-- DASH Cookbook
+I have also bought Bruce Frantzis BaGua Mastery Program which contains both videos, audio content, and written material.
 
 # Programming
 
@@ -62,12 +57,15 @@ A few week ago, I bought several books from YMAA.  I have bought some of Dr. Yan
 - HTML & CSS
 - Python Machine Learning
 - Category Theory for Programmers (web)
+- Javascript Alonge
+- Write You a Haskell
+- Vertx (web)
 
 ## Haskell Programming from First Principles
 
 To understand purescript, you kind of have to know haskell.  While in some ways I prefer LYAH better, this book does go
-into much greater detail.  It also covers things that LYAH does not.  Since Dao's core will be written in haskell and
-purescript, it just makes sense to read this.
+into much greater detail.  It also covers things that LYAH does not.  Since Dao's core will be written in purescript, it
+just makes sense to read this (eventually, it's a huge book).
 
 ## Functional Programming in Java 8
 
@@ -81,7 +79,7 @@ The only book on purescript so far.  Although it assumes no experience with hask
 explaining a lot of the syntax.  However, this is required reading for understanding the differences between it and
 haskell, including Eff and Aff.
 
-Since Dao will be running on the web, the front end is going to be in purescript and the backend will be in haskell.  
+Since Dao will be running on the web, the front end is going to be in purescript as well as some microservices.
 
 ## WebGL Programming Guide (book)
 
@@ -95,15 +93,18 @@ want to start writing the user content in raw html.
 
 ## Python Machine Learning
 
-I have always been cuious about AI.  I especially want to do stuff with bayesian models, neural nets
+I have always been curious about AI.  I especially want to do stuff with bayesian models, neural nets and other
+techniques.  Frankly, this will be more applicable to work, as I unless I implement enemy AI for Dao, I don't see much
+use for it in the game.
 
 ## Category Theory for Programmers (web)
 
-
+This is a very interesting book so far (I've only read the first 3 chapters though).  It explains the concepts of
+category theory without a lot of heavy math and proofs.  It also teaches haskell along the way.
 
 # Videos
 
-Ok, ok, these arent books, but I still need to watch all this crap
+Ok, ok, these arent books, but I still need to watch all this especially since I paid good money for it.
 
 - Mastering Git
 - Neigong DVD 1 and 2
@@ -116,3 +117,6 @@ Ok, ok, these arent books, but I still need to watch all this crap
 - Kung Fu Body Conditioning DVD 1 and 2
 - Qigong DVD 3-6
 - Legend of Korra
+- Bagua Mastery Program
+  - Module 1 - 6
+  - Module 13, 14

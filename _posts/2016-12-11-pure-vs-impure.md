@@ -171,9 +171,14 @@ a -> (b -> c).
 ## Useful examples
 
 I think the major part with applicatives is that if a function is wrapped inside a Functor, we cant just use that
-"wrapped inside a functor" function with map.  That's where Applicatives come into play
+"wrapped inside a functor" function with map.  That's where Applicatives come into play.  You will often see them used
+in combination with map.  This is because Applicatives have a function (of one argument) embedded inside some data type
+(where that data type obeys the requirements to be an Applicative)
 
 {% highlight haskell %}
+-- map
+(+10) <$> [10, 20]  -- [20, 30]
+(+) <$> [10] <\*> [10, 20] -- [20, 30]
 (+) <$> [10,20] <*> [3,4]
 (replicate) <$> [2,4] <*> ["a","b"]
 {% endhighlight %}
@@ -185,7 +190,6 @@ I think the major part with applicatives is that if a function is wrapped inside
 
 You will often come across the term "lifting", such as lifting a function.  What this means is essentially lifting the
 pure part of a computation into an impure one.  The "impure" part here meaning a Functor or Applicative of some sort.  
-Look at the type of map in Functor again.  If you look at the alternative definition of map, it takes a regular function
 of a -> b, and returns a new function of f a -> f b.  The original function's argument a and return type b, have been
 lifted into a new type.  We have gone from a pure computation of a -> b, to a function of a different kind f a -> f b.
 
@@ -212,13 +216,35 @@ x 10 -- [20, 40, 60]
 
 Now we get to Monads!  Some quick notes:
 
-- Monads are an abstraction (really a typeclass) for side effects
+- Monads are, in one way, an abstraction around the idea of flattening or concatenation
+- Monads are one way to model side effects, but side effects aren't monads
 - Monads have a relationship with *do* notation.  
 - There is a difference between computational side effects, and native side effects
 - Monads are useful for sequential operations
 - Monads allow you to chain or pipeline functions in a way Applicatives can not
   - The arguments which are lifted in an Applicative are independent of each other
   - Consequence: You can parallelize Applicatives with apply, but you can not with Monads
+
+## What monads are not
+
+- impure
+- IO
+- Only good for imperative Programming
+- state
+- effects
+- A value
+
+Rather, they are like this:
+
+- Monads can take two structures, one pure and one impure, and mush them together
+- IO has an instance of Monad (ie, it implements the operations of and obeys the Monad laws) but Monad is not IO
+- Because monadic structure can be used for sequencing operations, it is well suited for imperative operations
+- State can be implemented as an instance of Monad
+- As above
+- Monads are a typeclass, not a data value.  A data type can be instance of Monad, but a Monad is not a value
+  - Just as an interface in java is not a value, but it can be used polymorphically as a type (not a value)
+
+## Playing with monads
 
 Consider this code:
 
@@ -269,7 +295,7 @@ countThrows n = do
 countThrows' :: Int -> Array (Array Int)
 countThrows' n =
   (1 .. 6) >>= \x ->
-  (1 .. 6) >>= (\y -> if x + y == n
+    (1 .. 6) >>= (\y -> if x + y == n
                           then return [x,y]
                           else [])
 {% endhighlight %}
