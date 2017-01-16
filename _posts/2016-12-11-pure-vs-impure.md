@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "What are Functors, Applicatives and Monads good for?"
+title:  "What are Monoids, Functors, Applicatives and Monads good for? (UPDATED: 2016-12-19)"
 date:   2016-05-15 02:19:40 -0400
 categories: purescript notes
 ---
@@ -13,18 +13,40 @@ haskell or purescript does is tell you which parts of the program are pure or no
 This has several implications.  The first is that being pure or not is declared as part of its type.  In other words, by
 looking at the type, you can tell if it is pure or not.  This means that we know how to compose functions together due
 to their type.  Another consequence of this is that impurity is "contagious".  Any function calling an impure function
-also becomes impure.  The trick is that impure functions can have or contain pure functions.  Indeed, this is what
-the goal is in pure functional languages: isolating the pure from the impure.  
+also becomes impure.  The trick is that impure functions can have or contain pure computation or values.  Indeed, this
+is what the goal is in pure functional languages: isolating the pure from the impure.  
 
 This isolation, or encapsulation if you will, of purity in a sea of impurity gives us some benefits.  It means that we
 can prove our pure parts of the function and know that they are always correct.  It is the impure parts where we can
 focus our testing efforts due to their non-determinism.
 
-So what does this have to do with Functions, Applicatives and Monads (FAM)?  As I mentioned before, the purity of a
+So what does this have to do with Monoids, Functions, Applicatives and Monads?  As I mentioned before, the purity of a
 function is indicated by its type.  But how is a Functor impure?  Perhaps we can say that the Maybe type is impure as
-it represents the possibility of not having an answer.  But what a function?  A function is a Functor, but a function
+it represents the possibility of not having an answer.  But what of a function?  A function is a Functor, but a function
 can also be impure.  What about a List?  A List supports the Functor protocol, so how is it "impure"?  These notes are
 in some ways an attempt to answer that question.
+
+# Monoids
+
+Technically, Monoids don't encapsulate any notion of impurity.  However, they are important to understanding the utility
+and purpose of Applicatives and Monads, so I will cover a bit about them here.
+
+Monoids are essentially a generalization around "smashing" two data types together.  Addition is a canonical example of
+an operation on Monoids.  We can for example add numbers together, strings together, or lists together.  Monoids have
+2 functions in their type class definition: append and mempty.  Monoids are an interesting usecase for newtypes since
+it is possible for one data type to have multiple instances of Monoidal behavior.  Because of this, for a given data
+type, it may not be known what the append behavior should do.  An example of this is that for the Number data type, it
+is not clear if the append operation is supposed to do summation or multiplication, since both would be applicable.
+
+A key point to make about Monoids is that they have a shape or structure.  The append operation may not preserve this
+exact shape.  For example appending two strings creates a larger string.  Contrast this with the map operation of a
+Functor which must preserve the shape of the data structure it works with.  Indeed, this is why Monoids are associated
+with catamorphisms (_cata_ meaning to break down, as in catabolic, and _morphism_ or pertaining to shape) since with
+Monoidal types and folds, you can break or reduce a structure down.
+
+Another important aspect and perhaps its greatest use case is its involvement with folding.  Folding is most commonly
+used on data types which are an instance of a Monoid.  This is because a Monoid's append operation can be thought of
+as an accumulation, and typically that is what folds do to what they operate on.
 
 # Functors
 
@@ -36,7 +58,7 @@ that well when you think about 2 major applications for Functors:  IO and functi
 
 When you see it explained that functors are a "box" that holds some value, that analogy really only holds in some kinds
 of functors.  For example, what is the "box" when you consider that a function type is a Functor?  What is the box when
-you consider IO as a functor (is it the outside world)?  The better analogy is that a functor has or rather needs a
+you consider IO as a functor (is it the outside world)?  The better analogy is that a functor has or rather is a
 context.  But what is a "context"?  Let's look at some examples.
 
 Let's examine what a context is.  If you say "It depends on the context", then that means that "it" changes meaning
@@ -50,7 +72,7 @@ For example (+3) returns a value, depending on the parameter it is given.  The f
 Just or Nothing, depending on the value.  In other words, the context is 2 things:
 
 - The 2nd argument supplied to map will determine what kind of functor is returned
-- The context **is** the type (in the above example, a function type, and a Maybe type)
+- The context **is** the type (in the above examples, a function type, and a Maybe type)
 
 Recall the defintion of the map function:
 
@@ -76,45 +98,6 @@ give me a new function of (f a) -> (f b)".  This (f a) -> (f b) sure looks a lot
 because in many ways, they are the same.  What has changed is that the Functor f holds some extra information, but it
 still carries the mapping of a to b.  The magic then is _what is this extra information_?  As explained earlier, the
 type (which implements the Functor) _is_ the extra information (or context).
-
-## Applicatives are a special kind of Functor
-
-Because of the way it's defined, the function passed to map has to take a single arg.  But what if we pass a function
-that takes more than one argument?  Or a partially applied function?
-
-Recall that map takes a function that takes a single argument.  But what if we need to pass in a multi-arg function?
-The easiest solution is to pass in a partially applied function.  But an even more useful trick is available if we
-expand our definition of Functor by creating a new type class called an Applicative.  
-
-Applicatives are useful in the situation where you have a "regular" function (ie a pure function) taking regular value
-types.  But what if instead of a pure value, you only have another FAM type (Functor, Applicative, Monad)?  This is
-where lifting comes in handy.  You lift the pure function to be applied to "impure" values.  If your pure function only
-has a single parameter, then you can simply map it.  But if the pure function takes multiple arguments, then this is
-where Applicatives come in handy.  Recall the type definition of apply:
-
-{% highlight haskell %}
-apply :: forall f. (Applicative f) => f (a -> b) -> f a -> f b
-(<\*>) = apply
-{% endhighlight %}
-
-Notice that this definition looks very similar to map, the difference being that instead of taking a regular function
-type (a -> b), we have a function wrapped inside the Applicative.  How is that useful?  If you have a function that has
-multiple arguments, say for example 2 args like foo :: a -> b -> c, that can also be expressed due to currying as
-a -> (b -> c).   
-
-Imagine that we have a function:
-
-**TODO**
-*Show how to lift a pure function which normally only takes pure values into a function which can take Applicatives.*
-
-```haskell
-type Company = String
-type Employee = String
-type Roster = Map Employee Company
-
-setEmployee :: Employee -> Company -> Roster -> Roster
-
-```
 
 ## Functions as types
 
@@ -149,8 +132,43 @@ when we used it with a list:
 map (\x -> x * 2) [1 .. 5]
 ```
 
-
 # Applicatives
+
+Applicatives are a combination of a Functor and a Monoid.  They have the mapping aspect of a Functor with the "smashing"
+together aspect of a Monoid.  One difference though is that whereas a Monoid's append can change the shape of a data
+type, Applicatives can not.  However, Applicatives do still combine or smush together two other values.
+
+## Applicatives are a special kind of Functor
+
+Because of the way it's defined, the function passed to map has to take a single arg.  But what if we pass a function
+that takes more than one argument?
+
+Recall that map takes a function that takes a single argument.  But what if we need to pass in a multi-arg function?
+Remember that because purescript is curried, **all** functions are functions of a single argument!  Functions which seem
+to take multiple arguments are in fact just returning a new function with the argument from the outermost function fixed
+as a constant (ie, a closure).  We can see this like so:
+
+```haskell
+multi_arg :: forall a b c d. a -> (b -> (c -> d))
+```
+
+Applicatives are useful in the situation where you have a "regular" function (ie a pure function) taking regular value
+types.  But what if instead of a pure value, you only have another FAM type (Functor, Applicative, Monad)?  This is
+where lifting comes in handy.  You lift the pure function to be applied to "impure" values.  If your pure function only
+has a single parameter, then you can simply map it.  But if the pure function takes multiple arguments, then this is
+where Applicatives come in handy.  Recall the type definition of apply:
+
+{% highlight haskell %}
+apply :: forall f. (Applicative f) => f (a -> b) -> f a -> f b
+(<\*>) = apply
+{% endhighlight %}
+
+Notice that this definition looks very similar to map, the difference being that instead of taking a regular function
+type (a -> b), we have a function wrapped inside the Applicative.  How is that useful?  If you have a function that has
+multiple arguments, say for example 2 args like foo :: a -> b -> c, that can also be expressed due to currying as
+a -> (b -> c).   
+
+## Useful examples
 
 I think the major part with applicatives is that if a function is wrapped inside a Functor, we cant just use that
 "wrapped inside a functor" function with map.  That's where Applicatives come into play
@@ -159,6 +177,9 @@ I think the major part with applicatives is that if a function is wrapped inside
 (+) <$> [10,20] <*> [3,4]
 (replicate) <$> [2,4] <*> ["a","b"]
 {% endhighlight %}
+
+**TODO**
+**Show examples of lifting in a real context**
 
 ## Lifting with Functors and Applicatives
 
@@ -202,16 +223,17 @@ Now we get to Monads!  Some quick notes:
 Consider this code:
 
 {% highlight haskell %}
--- map :: forall a b. (Functor f) => (a -> b) -> f a -> fb  is equivalent to
 -- map :: forall a b. (Functor f) => (a -> b) -> (f a -> f b)
 map (\x -> Just x) (1 .. 5)
--- apply :: forall a b f. (Apply f) => f (a -> b) -> f a -> f b     is equivalent to
 -- apply :: forall a b f. (Apply f) => f (a -> b) -> (f a -> f b)   
 apply [(\x -> x * 2)] [5, 10]
 -- bind :: forall a b. (Monad m) => m a -> (a -> m b) -> m b
 -- Intuitively, in the first arg, take out the a from the monadic context, and apply it to the 2nd arg.
-bind (1 .. 5) (\x -> [Just x]) -- Since the monad is an array (of type a), what we return has to be an array (of type b)
-{% endhighlight %}
+-- Since the monad is an array (of type a), what we return has to be an array (of type b)
+bind (1 .. 5) (\x -> [Just x])
+(1 .. 5) >>= (\x -> [Just x])
+
+{% endhighlighting %}
 
 So, how come we can chain together Monads, but not Applicatives?  Because of the types.  As you can see, a Monad must
 support the bind operation.  If you look at the type of bind, the return type is (or rather can be) of the same time
@@ -251,3 +273,70 @@ countThrows' n =
                           then return [x,y]
                           else [])
 {% endhighlight %}
+
+
+## Useful examples
+
+**TODO**
+Show some real examples from the emissary project.  This should probably be its own blog post
+
+## Eff: Carrying information along
+
+**TODO**
+Explain how the Eff monads carry information inside them.  Probably in its own blog post
+
+## Monad Transformers
+
+**TODO**
+Explain why you need transformers.
+
+Consider the type of bind again:
+
+```haskell
+bind :: forall m a b. (Monad m) => m a -> (a -> m b) -> m b
+```
+
+The m here says that it is a data type that must be an instance of a Monad.  But more importantly, it has to be the
+_same_ monadic type.  In other words, you can't do something like this:
+
+```haskell
+-- lookupEnv :: String -> Eff (process :: PROCESS | e) (Maybe String)
+bind ["PATH", "HOME"] \k -> lookupEnv k
+-- or equivalently
+test = do
+  k <- ["PATH", "HOME"]
+  val <- lookupEnv k
+  case val of
+    Nothing -> pure ""
+    (Just x) -> pure x
+```
+
+So, how come I can't do that?  I said that my (m a) is an Array String, but my function returns a totally different
+type of Monad.  Perhaps you are thinking you can extract the String from the (Maybe String), perhaps providing a default
+if it doesn't exist, and then stuffing the results inside an Array String that is returned
+
+### The continuation monad
+
+A monad transformer takes a monad and transforms it into another monad.  The transformer is parameterized by both a type
+and another type constructor.  For example we can have:
+
+```haskell
+let Async = StateT String         (Either String)        String
+--                 type of state  underlying monad type  Return type
+```
+
+The (Either String) monadic type here is the additional monad that we are keeping track of in addition to StateT.  So
+this type represents something which can use mutable state and return with a failure.
+
+To use the outer type (the StateT type in this case), you can use do notation and bind as you would normally.  But to
+access the inner type, you have to use the lift command:
+
+```haskell
+-- Takes a monad type constructor and lifts it to a monad transformer
+lift :: forall m a. Monad m => m a            -> t             m a
+--                            (Either String)    StateT String (Either String)
+```
+
+So what is t?  T is the monad transformer.  Recall StateT above.  A monad transformer takes a type, a monad, and a
+return type.  We have the monad in (m a).  So that means that t must be a transformer with the first type.  From the
+example above, t would be a StateT String (m a), where m a in this case was (Either String).
