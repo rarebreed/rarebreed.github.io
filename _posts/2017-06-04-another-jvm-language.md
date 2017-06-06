@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Time to learn another JVM language?"
-date:   2017-05-04 07:21:40 -0400
+title: "Time to learn another JVM language?"
+date: 2017-05-04 07:21:40 -0400
 categories: jvm notes type-theory
 ---
 Hard to believe it's been about a year ago when I first started seriously looking into purescript and haskell.  Sadly,
