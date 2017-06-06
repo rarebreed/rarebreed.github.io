@@ -215,7 +215,7 @@ a Higher Kinded type is just the "type of a type"
 Number.  A value of that type doesn't need to know anything else, it just is.  But what about List\<T\>?  If I have a
 list of some type T, I need to know what T is before I can instantiate an instance of one.  So the type isn't complete
 yet. In haskell, the type of a type is called a Kind (hence higher kinded types).  So the Kind of a String is called *.
-Yup just an asterix.  What's the Kind of List<T> (or in haskell speak: List a)?  Well, I need to know what T is, so in
+Yup just an asterix.  What's the Kind of List\<T\> (or in haskell speak: List a)?  Well, I need to know what T is, so in
 haskell the Kind of this List would be: * -> *.
 
 Hmmmm, ok, so what do those * thingies really mean?  An asterix is a type!!  In haskell, the -> arrow is actually a
