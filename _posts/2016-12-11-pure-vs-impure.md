@@ -122,16 +122,6 @@ getKey :: k -> Map k v -> Maybe v
 getKey k (Map key )
 {% endhighlight %}
 
-
-## Why are functors useful?
-
-So why bother with Functors?  If you think about it, when we first encountered the map function, it was only useful
-when we used it with a list:
-
-```haskell
-map (\x -> x * 2) [1 .. 5]
-```
-
 # Applicatives
 
 Applicatives are a combination of a Functor and a Monoid.  They have the mapping aspect of a Functor with the "smashing"
@@ -170,7 +160,7 @@ a -> (b -> c).
 
 ## Useful examples
 
-I think the major part with applicatives is that if a function is wrapped inside a Functor, we cant just use that
+I think the major use of applicatives is that if a function is wrapped inside a Functor, we cant just use that
 "wrapped inside a functor" function with map.  That's where Applicatives come into play.  You will often see them used
 in combination with map.  This is because Applicatives have a function (of one argument) embedded inside some data type
 (where that data type obeys the requirements to be an Applicative)
@@ -241,7 +231,9 @@ Rather, they are like this:
 - Because monadic structure can be used for sequencing operations, it is well suited for imperative operations
 - State can be implemented as an instance of Monad
 - As above
-- Monads are a typeclass, not a data value.  A data type can be instance of Monad, but a Monad is not a value
+- Monads are a typeclass, not a data value.  
+  - A data type can be instance of Monad, but a Monad is not a value
+  - A monad is also parameterized on a type.  Eg (Maybe String), (Either Error), (StateT String (Either String))
   - Just as an interface in java is not a value, but it can be used polymorphically as a type (not a value)
 
 ## Playing with monads
