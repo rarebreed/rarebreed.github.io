@@ -2,9 +2,8 @@
 layout: post
 title:  "Time to learn another JVM language?"
 date:   2017-05-04 07:21:40 -0400
-categories: purescript notes continuation
+categories: jvm notes type-theory
 ---
-
 Hard to believe it's been about a year ago when I first started seriously looking into purescript and haskell.  Sadly,
 I still don't have a lot of experience with purescript.  I did have an opportunity awhile back where I put in probably
 a good month of work time investigating how to use purescript to call a subprocess.  Basically, I wanted to replace a
@@ -136,7 +135,7 @@ OSGi as well).  But having an already working out of the box modularity is nice 
 The way ceylon handles nulls is kind of interesting, and it basically provides for some syntactic sugar.  Basically,
 nulls are not allowed unless you postfix a type with ? (or you use a union type).  For example:
 
-```ceylon
+```
 String someString = someFn();  // someFn() can not return a null...it is a compiler error if it doesnt
 
 String? anotherString = anotherFn();  // anotherFn() can return a null
@@ -152,7 +151,7 @@ that this collection is empty?  I run into this all the time.  In python, you us
 collection is a _falsey_ value, so you can do a truth check on it.  In clojure, you can do something like (empty? coll)
 and so on.  Ceylon has a way to specify if a function must return a collection with zero or more, or one or more items.
 
-```ceylon
+```
 {String+} atLeastOneItem();
 {String*} zeroOrMoreItems();
 ```
@@ -232,7 +231,7 @@ Functors, you can't Applicatives, and without Applicatives, you can't have Monad
 most languages don't have that either.
 
 This is true, but if you're going to have a nice type system, go all the way and just support it.  According to some
-blog posts, apparently the ceylon compiler itself makes use of parameterized Type constructors, so I'm not sure why they 
+blog posts, apparently the ceylon compiler itself makes use of parameterized Type constructors, so I'm not sure why they
 don't implement it for both the JVM and javascript backends.
 
 # What next?
