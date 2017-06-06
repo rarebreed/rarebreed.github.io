@@ -212,18 +212,18 @@ a Higher Kinded type is just the "type of a type"
 ```
 
 "A type of a type?"  Yeah, I know.  So, think about it this way.  A String or a Number is just that, a String or a
-Number.  A value of that type doesn't need to know anything else, it just is.  But what about List<T>?  If I have a list
-of some type T, I need to know what T is before I can instantiate an instance of one.  So the type isn't complete yet.
-In haskell, the type of a type is called a Kind (hence higher kinded types).  So the Kind of a String is called *.  Yup
-just an asterix.  What's the Kind of List<T> (or in haskell speak: List a)?  Well, I need to know what T is, so in
+Number.  A value of that type doesn't need to know anything else, it just is.  But what about List\<T\>?  If I have a
+list of some type T, I need to know what T is before I can instantiate an instance of one.  So the type isn't complete
+yet. In haskell, the type of a type is called a Kind (hence higher kinded types).  So the Kind of a String is called *.
+Yup just an asterix.  What's the Kind of List<T> (or in haskell speak: List a)?  Well, I need to know what T is, so in
 haskell the Kind of this List would be: * -> *.
 
 Hmmmm, ok, so what do those * thingies really mean?  An asterix is a type!!  In haskell, the -> arrow is actually a
 function.  But recall, in functional languages functions _are_ types!  So, a higher kinded type is a type (or function
-actually) that takes one or more Types, and returns some other Type.  So, what about a Map?  In Java, you have Map<K, V>
-(or in haskell it would be Map k v).  So its Kind would be * -> * -> *.  Starting to get it?  If you say you want a Map,
-you really have to say "I want a Map of (key type) String to (value type) String."  You can't just say "give me a Map.".
-If you did, the compiler will say "A Map of what??".
+actually) that takes one or more Types, and returns some other Type.  So, what about a Map?  In Java, you have
+Map\<K, V\> (or in haskell it would be Map k v).  So its Kind would be * -> * -> *.  Starting to get it?  If you say you
+want a Map, you really have to say "I want a Map of (key type) String to (value type) String."  You can't just say "give
+ me a Map.". If you did, the compiler will say "A Map of what??".
 
 Ok, what's this got to do with ceylon and why is it a bad thing?  Afterall, java doesn't have this concept either and it
 gets along fine without out.  The problem is that with out the concept of HKT's, you can't have Functors.  And without
