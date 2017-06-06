@@ -4,62 +4,7 @@ title: "Finally doing real programming in purescript!"
 date: 2016-12-12 00:51:40 -0700
 categories: purescript
 ---
-So I've finally started writing some non-trivial code in purescript in my emissary project.  Right now, it's pretty
-simple stuff, mostly calling out to create some child processes and a super simple webserver.  But what has me excited
-is that I'm finally doing real-world stuff.  Slowly but surely, I'm starting to get a handle on monads and the effects
-system. However, there are still three things that I need to get better to become more fluent in purescript.
 
-- Monad Transformers
-- asynchronous programming (either with aff or maybe rx)
-- lenses
-
-For the actual services, I'll also need to dig into the following modules:
-
-- purescript-eff in particular, why my extensible effect types aren't doing what I think they should be
-- purescript-websocket-simple to create the websocket upgrade connection
-- purescript-node-* all the node bindings, because I need to do stuff like write to files, delete directories, etc
-
-It's a good feeling that I have finally got some working code, and I have at least a working understanding of monads,
-and how and when to lift code.  I do think think that there's not a lot of good learning material on purescript, and I
-might wind up writing some "cookbook" style recipes for purescript.  As hard of a sell as clojure is to people, I think
-that purescript will be an even harder sell if only due to the learning curve.
-
-As I learn purescript, I'd also like to talk about some other pain points I've been having.  For example, why I have to
-get better at the 3 things above.
-
-# Rank-n types
-
-So, I've been having a lot of problems with Eff and extensible effects.  Take for example this code:
-
-```haskell
--- ObsFn is the type of a function which takes a type that is Showable, has some kind of effect, and returns Unit
-type ObsFn a e :: forall a e. Show a => a -> Eff e Unit
-
-testing :: forall a. ObsFn a (console :: CONSOLE)
-testing a = do
-  log $ show a
-```
-
-This function won't work though given the testing function.  You will see an error that says:
-
-```
-"Could not match Kind
-  Type
-with Kind
-  # Effect
-while checking that the Kind of ObsFn a (console :: CONSOLE)
-in value declarion testing"
-```
-
-hmmmm.  What does that even mean?
-
-First off, what does **ObsFn a (console :: CONSOLE)** even mean?  What was I trying to _say_?  If you look at the
-original definition of ObsFn, look at what the e parameter is.  It's in _Eff e Unit_.  If you look at the type for Eff,
-it has the following type:
-
-```haskell
-data Eff :: # Effect -> Type -> Type
-```
 
 Ok, given that, we can see that _e_ must be a type of Type.  So what's a Type?  A Type is a synonym for *, the same
 symbol you see when talking about Kinds.  Ok, so how does this help us?  The problem here is figuring out which argument
@@ -88,15 +33,12 @@ is the effect itself not required?
 
 A more simple example is if I want to create a function that can work with any Effect type.
 
-```haskell
+{% highlight haskell %}
 type FooFn :: forall a r eff. a -> Eff eff r
-```
+{% endhighlight %}
 
 So, the trick it seems, is to do it like this:
 
-```haskell
-type FooFn eff
-```
 
 # Monad Transformers
 
@@ -108,19 +50,19 @@ Map String (Eff (process :: PROCESS) (Maybe String)).
 
 If you look at the type of bind, this isn't possible:
 
-```haskell
+{% highlight haskell %}
 -- The m type is fixed
 bind :: forall m a b. (Monad m) => m a -> (a -> m b) -> m b
-```
+{% endhighlight %}
 
 Recall that the _m_ here is fixed.  If I start with Eff (process :: Process | eff) (Maybe String) as my _m_, then I have
 to return that type as well.  In other words, although the inner pure value can change from type _a_ to type _b_, the
 type of the monad itself needs to change.  In other words, I need something like this:
 
-```haskell
+{% highlight haskell %}
 -- We have two different monadic types m1 and m2
 transform :: forall m1 m2 a b. (Monad m1, Monad m2) => m1 a -> (a -> m2 b) -> m2 b
-```
+{% endhighlight %}
 
 Ideally though, this new form should work with the do syntax to make things easier.  My understanding so far is that
 this is what monad transformers provide.  This is slightly different than what extensible effects provide.

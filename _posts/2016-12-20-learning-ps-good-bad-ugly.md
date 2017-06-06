@@ -53,12 +53,11 @@ currently, I'm doing client side programming,
 ## The many ways to combine functions
 
 ```haskell
-
-addStuff :: Int -> Int  
-addStuff = do  
-    a <- (*2)  
-    b <- (+10)  
-    return (a+b)  
+addStuff :: Int -> Int
+addStuff = do
+    a <- (*2)
+    b <- (+10)
+    return (a+b)
 
 -- Is equivalent to the above
 -- Note how
@@ -67,7 +66,7 @@ addStuff' = (_ * 2) >>= \a -> (_ + 10) >>= \b -> pure (a + b)
 --                      m b            >>= (a -> m c)
 -- From this, we see that (_ * 2) is a monad.  Ergo, functions are monads
 -- But what is the a in (m a)?  For example Just 10 the m is Maybe, and the a is 10
--- In this case, the a is the function itself.  Eg we wind up with addStuff' x = (x * 2) + (x + 10)    
+-- In this case, the a is the function itself.  Eg we wind up with addStuff' x = (x * 2) + (x + 10)
 
 -- And this is the Applicative way
 addStuff'' = (+) <$> (_ * 2) <*> (_ + 10)
