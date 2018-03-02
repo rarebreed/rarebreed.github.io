@@ -49,7 +49,6 @@ going to flow's site and looking at their Getting Started docs.
 
 ## Why FRP?
 
-
 It might be useful to begin with why we even need FRP in the first place. Doesn't OOP give me everything I need? Why all
 this hoopla about Functional Programming (FP)? And now Reactive? What's wrong with good old transactions and locks?
 
@@ -273,8 +272,7 @@ they don't have state, but they have the illusion of state).
   store already calculated values *somewhere* and then if it sees a call to itself with the same argument, it can just
   look up the cached answer.
 
-Currying
-++++++++
+#### Currying
 
 I decided to give this its own section, because while it's simple, people confuse it with partial application because
 they are sort of similar.
@@ -363,8 +361,7 @@ A computation therefore is the traversal of a graph!! When you hear fancy talk a
 what that is, in a vastly simplified nutshell, is a way to glue your pipeline together (and to separate the pure part of
 a computation from the impure parts).
 
-.. image:: ./images/computation-as-graph.png
-   :scale: 70 %
+![Computation as a grap][-computation-as-graph]
 
 So why is it advantageous to think of a program as composition of functions or like a graph? If you see your program in
 this light, it is easier to visualize the flow and transformation of data along the way. Async and multithreaded

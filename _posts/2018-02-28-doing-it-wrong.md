@@ -1,12 +1,18 @@
 ---
 layout: post
-title:  "You're doing it all wrong"
+title:  "You're doing it all wrong: Part 1 (UPDATED: 03/02/2018)"
 date:   2018-02-28 22:41:00 -0400
 categories: FP, FRP, culture
 ---
 I decided that there needs to be a tool for companies to store documents necessary for software projects.  Having used
 tools like Rational Tools and Polarion, there had to be something that was enterprise quality, but still more nimble
-and easy to use for open source projects.
+and easy to use for open source projects.  But on my journey to create better tooling, I encountered many
+unusual perceptions from fellow engineers or management about how to do things.
+
+I'll attempt here to explain my views on how to step outside of the box, and why a cultural mindset, even if
+"open" can still be problematic.  While this criticism may sound like this is only against my current 
+company, it is not.  I have, unfortunately, experienced this at every company I've worked for in one form or
+another.
 
 # You're doing it all wrong
 
@@ -17,21 +23,25 @@ as you read this article and make a note of why whatever you read caused you to 
 
 First off, what are we doing wrong?
 
-- Not recognizing it's an asynchronous world
-- Trying to store state in some object instead of reacting to changes in state
-- OOP because it is familiar, instead of FP because it actually solves problems
-- Dynamic Typing instead of Static typing because you think static typing is unnecessary
-- Easier is not better
-- Using mutable data willy nilly instead of immutable data
-- Using SQL because you know RDBMS (and you think CRUD and consistency are the only ways to handle data)
-- Monolithic entities instead of microservices
-- Wanting to use python for everything, even if it's not a good fit
-- Always using pull based technology (ie, one-way directional) instead of push/pull
-- Architecting/Designing to specific implementations instead of abstractions
-- Not implementing truly Agile product teams, and instead having devs and QE as separate teams
-- Over reliance on black box end to end system testing
-- Forcing or at least expecting standardization and one-size-fits-all mentality
-- Not enough QE
+- Technical
+    - Not recognizing it's an asynchronous world
+    - Trying to store state in some object instead of reacting to changes in state
+    - OOP because it is familiar, instead of FP because it actually solves problems
+    - Dynamic Typing instead of Static typing because you think static typing is unnecessary
+    - Using mutable data willy nilly instead of immutable data
+    - Using SQL because you know RDBMS (and you think CRUD and consistency are the only ways to handle data)
+    - Monolithic entities instead of microservices
+    - Wanting to use python for everything, even if it's not a good fit
+    - Always using pull or push based technology (ie, one-way directional) instead of push/pull
+    - Architecting/Designing to specific implementations instead of abstractions
+- Cultural
+    - Confusing symptoms of the disease with its cause
+    - Not implementing truly Agile product teams, and instead having devs and QE as separate teams
+    - Over reliance on black box end to end system testing
+    - Being afraid to fail
+    - Being afraid to rock the boat
+    - Fear of change
+    - Short term vs. Long term thinking
 
 ## The hard problems are psychological or cultural, not technical
 
@@ -118,8 +128,8 @@ on "short dopamine feedback loops" to make you essentially addicted to watching 
 it yesterday.  But that's not how reality works.  The consequences and ramifications of certain things can take a long time 
 to see the results of (for better or worse).
 
-Often, management wants immediate feedback to determine whether what is being done has positive effects or not.  Indeed, the
-very way we are reviewed at Red Hat is called "Management By Objective" and it has some criticisms leveled against it.  For 
+Often, management wants immediate feedback to determine whether what is being done has positive effects or not.  Indeed,
+many companies use "Management By Objective" for their review process and it has some criticisms leveled against it.  For 
 one, when goals (and a metric to determine whether you've achieved your goal or not has been met) become how our performance
 is determined, then the only thing that matters is the goal.  A tunnel vision ensues where you miss the forest for the trees.
 
@@ -146,7 +156,7 @@ efficient way to do things.  Did you seriously consider giving it the old colleg
 Perhaps you say "but I am too busy at work".  This is more valid, and this is where managers need to step up and provide time.
 A company where managers dont give opportunities for their employees to grow is not a very good company.  But I think most 
 managers are willing to do this, as long as the managers think the time investment is worthwhile.  For example, I dont think
-any manager at Red Hat would have any issue whatsoever to take training from Red Hat University.
+any manager would have any issue whatsoever to take training that they provide internally (for example Red Hat University).
 
 But what if you asked for time to learn rxjava?  Or how to program in kotlin?  Or heck shoot for the stars and ask them to see
 if you can try out eta or haskell.  This is where most managers will probably raise an eyebrow.  I'll get to why managers 
@@ -276,7 +286,7 @@ Not a single language was dynamic.  Sure, elixir is dynamic, but that came out m
 Look at all the compile to javascript languages too.  How come all of them are statically typed?  If dynamic languages are so
 awesome, how come Microsoft invested all this energy into typescript, and Facebook into flow and reasonml?  Or google with
 dart (a failed effort, and they are now using typesscript as an official language).  If three of the biggest javascript using
-companies switched over from javascript to some other language...why?
+companies switched over from javascript to some other typed language...why?
 
 Ok, one could reasonably argue that javascript sucks.  I think you will be hard pressed to find javascript programmers who 
 even if they like javascript, wont admit that javascript has a ton of problems.  The problems with _this_, non-lexical scoping,
@@ -299,3 +309,6 @@ which would otherwise be valid, but can not be typed.
 That's not what I said :)  There are some expressions which are semantically and logic valid, but can't be expressed properly
 with a type.  For these rare circumstances, typed systems do offer escape hatches.  But these cases are rare.
 
+## What to talk about next?
+
+So, I'll close this post for now, and continue with why "you're doing it all wrong".  
