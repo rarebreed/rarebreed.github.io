@@ -37,13 +37,12 @@ The theory part (links open to external sites):
 
 The practical part
 
-- :ref:`flow-types`
 - [Setting up and using flow][-flow-setup]
 - [Getting and using VS Code][-vscode-setup]
 
 **NOTE** I've been switching to typescript simply because there's more libraries with typescript defs
 
-I am going to illustrate, as much as possible, examples using the `Flow`_ language.  Flow is basically a type
+I am going to illustrate, as much as possible, examples using the Flow language.  Flow is basically a type
 checker for javascript with a fairly powerful type system (more powerful than Java actually).  I recommend
 going to flow's site and looking at their Getting Started docs.
 
@@ -361,7 +360,7 @@ A computation therefore is the traversal of a graph!! When you hear fancy talk a
 what that is, in a vastly simplified nutshell, is a way to glue your pipeline together (and to separate the pure part of
 a computation from the impure parts).
 
-![Computation as a grap][-computation-as-graph]
+![Computation as a graph][-computation-as-graph]
 
 So why is it advantageous to think of a program as composition of functions or like a graph? If you see your program in
 this light, it is easier to visualize the flow and transformation of data along the way. Async and multithreaded

@@ -255,13 +255,14 @@ get a little defensive when they hear how much better FP is.
 - FP is too much of a performance hit
 - FP doesn't have design patterns to help you out
 
-First, let me point you to my article about Functional Programming on DZone.  Come back when you're done.
+First, let me point you to my article about [Functional Programming on DZone][-fp-dzone].  Come back when you're done.
 
 Read it?  You may want to read the comments too.  They are probably just as informative as the content of the article.  Noticed that
 I said that OOP and FP are not mutually exclusive.  This is true, but OOP just isn't necessary.
 
-The biggest problem with OOP is that it's just not composeable.
-
+The biggest problem with OOP is that it's just not composeable.  The other problem with OOP was conflating data (state) with
+methods (algorithms).  It's an intuitive notion for sure, but it also tightly couples the two together...which we should not
+be doing.
 
 ## Dynamic typing lost
 
@@ -312,3 +313,5 @@ with a type.  For these rare circumstances, typed systems do offer escape hatche
 ## What to talk about next?
 
 So, I'll close this post for now, and continue with why "you're doing it all wrong".  
+
+[-fp-dzone]: https://dzone.com/articles/functional-programming-is-not-what-you-probably-th
