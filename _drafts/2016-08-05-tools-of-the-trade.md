@@ -201,6 +201,11 @@ back hell.
 
 ## Purescript/Javascript
 
+**UPDATE** 
+
+Sadly, purescript has been too volatile to be practical to use.  Moreover, they are still using bower, which is on 
+life-support, as its dependency manager.  So, I think purescript is not ready for prime time
+
 Lots of work here.  Need to learn more javascript libraries, and how to debug javascript apps.
 
 - Bower for dependency management
