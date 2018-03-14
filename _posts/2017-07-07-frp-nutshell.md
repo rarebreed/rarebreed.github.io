@@ -1901,9 +1901,9 @@ Here's a compendium of resources I used which don't have any inline links:
 [cyclejs]: https://cycle.js.org/
 [-gen-async-await]: https://medium.com/javascript-scene/the-hidden-power-of-es6-generators-observable-async-flow-control-cfa4c7f31435
 [-explore-esnext]: http://exploringjs.com/es2016-es2017.html
-[-egghead.io]: https://egghead.io/
+[-egghead]: https://egghead.io/
 [-explore-es6]: http://exploringjs.com/es6/index.html
-[allonge][-allonge]: https://leanpub.com/javascriptallongesix/read
+[-allonge]: https://leanpub.com/javascriptallongesix/read
 [-reactivex]: http://reactivex.io/
 [-rxjs]: http://reactivex.io/rxjs/
 [-ramda]: http://ramdajs.com/
