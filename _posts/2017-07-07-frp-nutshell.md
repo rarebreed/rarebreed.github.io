@@ -1886,7 +1886,7 @@ This would be jsdom.
 Here's a compendium of resources I used which don't have any inline links:
 
 - [egghead.io][-egghead]: Some free online video tutorials
-- [exploring es2016 and 2017][-explore-esnext] Free online book about es2016 and es2017 (proposed)
+- [exploring es2016 and 2017][-explore-esnext]: Free online book about es2016 and es2017 (proposed)
 - [exploring es6][-explore-es6]: Book by same author as above covering es6 
 - [avajs][-avajs]: asynchronous test runner
 - [allonge][-allonge]: Javascript Allonge sixth edition

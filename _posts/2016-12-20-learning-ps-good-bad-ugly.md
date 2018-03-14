@@ -59,8 +59,8 @@ addStuff = do
     b <- (+10)
     return (a+b)
 
--- Is equivalent to the above
--- Note how
+-- This is equivalent to the above
+-- Note how this is using the actual bind operator rather than do notation
 addStuff' = (_ * 2) >>= \a -> (_ + 10) >>= \b -> pure (a + b)
 --          m a     >>= (a -> m b)     >>= (a -> m c)
 --                      m b            >>= (a -> m c)
@@ -73,3 +73,7 @@ addStuff'' = (+) <$> (_ * 2) <*> (_ + 10)
 -- If you do the fmap first, you get ((_ * 2) + _) , then we apply that, we get ((_ * 2) + (_ + 10))
 -- And this is equivalent
 ```
+
+Note that haskell does curried functions a little different.  In purescript, it was (_ * 2), but in haskell, it's just (*2).  It's 
+little gotchas like that that can trip you up.  This is one reason I would prefer to wait for purescript 1.0 release to come out.
+Until then, I think I'll have to make do with eta.
