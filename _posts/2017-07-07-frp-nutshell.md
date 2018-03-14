@@ -37,14 +37,16 @@ The theory part (links open to external sites):
 
 The practical part
 
-- [Setting up and using flow][-flow-setup]
-- [Getting and using VS Code][-vscode-setup]
+**FIXME** 
 
-**NOTE** I've been switching to typescript simply because there's more libraries with typescript defs
+I've moved on to typescript, so this doc will be in flux while I transition it with typescript notes
 
-I am going to illustrate, as much as possible, examples using the Flow language.  Flow is basically a type
-checker for javascript with a fairly powerful type system (more powerful than Java actually).  I recommend
-going to flow's site and looking at their Getting Started docs.
+- [Setting up and using typescript][-ts-setup]
+- [Getting and using VS Code][-vscode-setup][with typescript][-vs-ts]
+
+I am going to illustrate, as much as possible, examples using the Typescript language.  Typescript is basically a transpiler
+to javascript with a fairly powerful type system (more powerful than Java actually).  I recommend going to typescripts' 
+site and looking at their Getting Started docs.
 
 ## Why FRP?
 
@@ -465,8 +467,8 @@ imperative style function, you have to examine the code to figure out what it's 
 
 This style of error handling comes more from the pure FP lineage (ie, haskell and its derivatives) but these concepts
 can be applied to pretty much any language.  Some languages or libraries are more particular about FP style error
-handling than others (for example RxJS and cyclejs use a very monadic style of error handling, but clojure seems to
-eschew FP style error handling with its lack of null-handling and imperative style try/catch macros).
+handling than others (for example [RxJS][-rxjs] and cyclejs use a very monadic style of error handling, but clojure seems
+to eschew FP style error handling with its lack of null-handling and imperative style try/catch macros).
 
 Let's look at two of the most common errors that you will have to deal with: null values and runtime exceptions (usually
 caused by some kind of IO).
@@ -1762,19 +1764,19 @@ So, embrace it :)  To get started, just follow their webpage
 
 So far, I haven't found a unit testing framework that ticks off all my checklist items.
 
-+-----------+------------+------------+-----------+------------------+--------------+----------------------+
+
 | Framework | In browser | No globals | Fat arrow | Async Support    | Flow Support | Others               |
-+===========+============+============+===========+==================+==============+======================+
+|-----------|------------|------------|-----------|------------------|--------------|----------------------|
 | Jasmine   | Y          | N          | N         | Promises         | typescript   |                      |
-+-----------+------------+------------+-----------+------------------+--------------+----------------------+
+|-----------|------------|------------|-----------|------------------|--------------|----------------------|
 | Mocha     | Y          | N          | N         | Promises         | ?            | requires assertions  |
-+-----------+------------+------------+-----------+------------------+--------------+----------------------+
+|-----------|------------|------------|-----------|------------------|--------------|----------------------|
 | Jest      | N          | N          | Y         | Prom,async/await | flow         | has snapshotting     |
-+-----------+------------+------------+-----------+------------------+--------------+----------------------+
+|-----------|------------|------------|-----------|------------------|--------------|----------------------|
 | AVA       | N          | Y          | Y         | Prom,async/await | flow         |                      |
-+-----------+------------+------------+-----------+------------------+--------------+----------------------+
+|-----------|------------|------------|-----------|------------------|--------------|----------------------|
 | Tape      | Y          | Y          | Y         | None (callbacks) | None         |                      |
-+-----------+------------+------------+-----------+------------------+--------------+----------------------+
+|-----------|------------|------------|-----------|------------------|--------------|----------------------|
 
 You might be wondering why I wanted those checklist items...
 
@@ -1883,39 +1885,32 @@ This would be jsdom.
 
 Here's a compendium of resources I used which don't have any inline links:
 
-- `egghead.io`_: Some free online video tutorials
-- `exploring es2016 and 2017`_: Free online book about es2016 and es2017 (proposed)
-- `exploring es6`_: Book by same author as above covering es6 
-- `avajs`_: asynchronous test runner
-- `allonge`_: Javascript Allonge sixth edition
-- `reactivex`_: One of the best documented sites I've ever seen.
-- `rxjs`_: The javascript implementation of reactivex
-- `ramda`_: Javascript library for functional programming (seems more pure FP'ish than underscore or lodash)
+- [egghead.io][-egghead]: Some free online video tutorials
+- [exploring es2016 and 2017][-explore-esnext] Free online book about es2016 and es2017 (proposed)
+- [exploring es6][-explore-es6]: Book by same author as above covering es6 
+- [avajs][-avajs]: asynchronous test runner
+- [allonge][-allonge]: Javascript Allonge sixth edition
+- [reactivex][-reactivex]: One of the best documented sites I've ever seen.
+- [ramda][-ramda]: Javascript library for functional programming (seems more pure FP'ish than underscore or lodash)
 
 [-Functional Programming]: https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c
 [-react-async]: https://manning-content.s3.amazonaws.com/download/e/c2b3ad4-82b9-471e-9579-0c656d472fcd/Daniels_RxJSiA_MEAP_V08_ch1.pdf
 [-pure-func]: https://dzone.com/articles/functional-programming-is-not-what-you-probably-th
-.. _Flow: http://flow.org
-.. _Type Systems: https://flow.org/en/docs/types/
 [-total-funcs]: https://dzone.com/articles/total-and-partial-functions-in-fp
 [-immutable]: https://facebook.github.io/immutable-js/
-.. _Variance: https://flow.org/en/docs/lang/variance/
 [cyclejs]: https://cycle.js.org/
-.. _Type refinement: https://flow.org/en/docs/lang/refinements/
-.. _redux: http://redux.js.org/
-.. [-gen-async-await]: https://medium.com/javascript-scene/the-hidden-power-of-es6-generators-observable-async-flow-control-cfa4c7f31435
-.. _exploring es2016 and 2017: http://exploringjs.com/es2016-es2017.html
-.. _egghead.io: https://egghead.io/
-.. _exploring es6: http://exploringjs.com/es6/index.html
-.. _allonge: https://leanpub.com/javascriptallongesix/read
-.. _reactivex: http://reactivex.io/
-.. _rxjs: http://reactivex.io/rxjs/
-.. _ramda: http://ramdajs.com/
-.. _avajs: https://github.com/avajs/ava
-.. _Setting up and using flow: https://flow.org/en/docs/getting-started/
-.. _Getting and using VS Code: https://code.visualstudio.com/
-.. _immutablejs: https://facebook.github.io/immutable-js/
+[-gen-async-await]: https://medium.com/javascript-scene/the-hidden-power-of-es6-generators-observable-async-flow-control-cfa4c7f31435
+[-explore-esnext]: http://exploringjs.com/es2016-es2017.html
+[-egghead.io]: https://egghead.io/
+[-explore-es6]: http://exploringjs.com/es6/index.html
+[allonge][-allonge]: https://leanpub.com/javascriptallongesix/read
+[-reactivex]: http://reactivex.io/
+[-rxjs]: http://reactivex.io/rxjs/
+[-ramda]: http://ramdajs.com/
+[-avajs]: https://github.com/avajs/ava
+[-vscode-setup]: https://code.visualstudio.com/
+[-vs-ts]: https://code.visualstudio.com/docs/languages/typescript
+[-ts-setup]: http://www.typescriptlang.org/docs/home.html
 [-commando]: https://github.com/rarebreed/smog/blob/master/smog/core/commander.py
 [-uplift]: https://github.com/rarebreed/commando/blob/master/src/commando/command.clj
-.. _flow types: https://flow.org/en/docs/lang/
 [-run-to-completion]: http://2ality.com/2017/01/shared-array-buffer.html
