@@ -11,13 +11,13 @@ useful as a computer scientist.  My personal goals are to focus on the following
 - Typescript for ecmascript (possibly purescript if they ever get to 1.0 release)
 - Rust for webassembly, fast ecmascript modules (think numpy for node/browser), and IoT
 
-I'm going to avoid python where I can.  I just don't see the point when ecmascript is faster, you have to use it for
-the browser anyways, and it still doesn't have a staticallly-typed-compile to python language (and no, PEP484 does not 
-count). Java I will have to do because of work. But, I would like to write new code in eta.  I'm already writing lots 
-of typescript now.  Rust is something I am still learning, but it seems really interesting so far.
+I'm going to avoid python where I can.  I just don't see the point when ecmascript is faster, you have to use ecmascript
+for the browser anyways, and python still doesn't have a statically-typed-compile to python language (and no, PEP484 does
+not count). Java I will have to do because of work. But, I would like to write new code in eta.  I'm already writing 
+lots of typescript now.  Rust is something I am still learning, but it seems really interesting so far.
 
-I think by learning these 3 languages, I have all the bases covered (from scripting, to systems programming, to back
-end EE programming).
+I think by learning these 3 languages, I have all the bases covered (from scripting, to systems programming, to backend
+enterprie programming).
 
 For the concurrency front, FRP and reactive seems to be the way to go.  Not only does it handle concurrency well, it
 also handles asynchronous execution well.  Unfortunately there is no reactivex/FRP library for rust, so I might just
