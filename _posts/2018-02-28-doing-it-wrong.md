@@ -24,16 +24,16 @@ as you read this article and make a note of why whatever you read caused you to 
 First off, what are we doing wrong?
 
 - Technical
-    - Not recognizing it's an asynchronous world
-    - Trying to store state in some object instead of reacting to changes in state
-    - OOP because it is familiar, instead of FP because it actually solves problems
-    - Dynamic Typing instead of Static typing because you think static typing is unnecessary
-    - Using mutable data willy nilly instead of immutable data
-    - Using SQL because you know RDBMS (and you think CRUD and consistency are the only ways to handle data)
-    - Monolithic entities instead of microservices
-    - Wanting to use python for everything, even if it's not a good fit
-    - Always using pull or push based technology (ie, one-way directional) instead of push/pull
-    - Architecting/Designing to specific implementations instead of abstractions
+  - Not recognizing it's an asynchronous world
+  - Trying to store state in some object instead of reacting to changes in state
+  - OOP because it is familiar, instead of FP because it actually solves problems
+  - Dynamic Typing instead of Static typing because you think static typing is unnecessary
+  - Using mutable data willy nilly instead of immutable data
+  - Using SQL because you know RDBMS (and you think CRUD and consistency are the only ways to handle data)
+  - Monolithic entities instead of microservices
+  - Wanting to use python for everything, even if it's not a good fit
+- Always using pull or push based technology (ie, one-way directional) instead of push/pull
+- Architecting/Designing to specific implementations instead of abstractions
 - Cultural
     - Confusing symptoms of the disease with its cause
     - Not implementing truly Agile product teams, and instead having devs and QE as separate teams
