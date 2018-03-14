@@ -1,22 +1,45 @@
 ---
 layout: post
-title:  "Tools of the trade"
+title:  "Tools of the trade (UPDATED: 03-13-2018)"
 date:   2016-05-15 02:19:40 -0400
 categories: functional cs
 ---
 It takes more than knowing how to program to be a good engineer.  Here, I will describe some skills that I believe are
-useful as a computer scientist.  Note that I said scientist, and not engineer.  My interests lie more in pushing the
-boundaries than in building a product per se.  Knowledge is my own reward.
+useful as a computer scientist.  My personal goals are to focus on the following languages and stacks:
 
-# Functional programming
+- Eta for JVM programming
+- Typescript for ecmascript (possibly purescript if they ever get to 1.0 release)
+- Rust for webassembly, fast ecmascript modules (think numpy for node/browser), and IoT
 
-This is a huge topic in and of itself, but here I will go over haskell style of functional programming
+I'm going to avoid python where I can.  I just don't see the point when ecmascript is faster, you have to use ecmascript
+for the browser anyways, and python still doesn't have a statically-typed-compile to python language (and no, PEP484 does
+not count). Java I will have to do because of work. But, I would like to write new code in eta.  I'm already writing 
+lots of typescript now.  Rust is something I am still learning, but it seems really interesting so far.
+
+I think by learning these 3 languages, I have all the bases covered (from scripting, to systems programming, to backend
+enterprie programming).
+
+For the concurrency front, FRP and reactive seems to be the way to go.  Not only does it handle concurrency well, it
+also handles asynchronous execution well.  Unfortunately there is no reactivex/FRP library for rust, so I might just
+make my own as a learning project.  Haskell's sodium library is also a bit different.  I might wind up either 
+writing a library in eta, or porting rxjava.
+
+# Functional programming and Category Theory
+
+This is a huge topic in and of itself, but here I will go over mostly haskell style of functional programming.
 
 - Polymorphism via typeclasses (Functors, Applicatives, Monads)
 - Category Theory (read Bartosz Milewskis articles)
 - Recursion/Corecursion
-- Monad uses and composition
-- Composition of data types
+- Monad Transformers
+- Combinators (lambda calculus)
+- Arrows (relaxed monads)
+- Higher Kinded Types
+- Higher Ranked Functions
+- Modules as types (reasonml)
+- GADTs
+- Existential Types
+- Dependent Types
 
 ## Data Structures
 
@@ -53,27 +76,30 @@ every language platform will have its own implementation.  For example, javascri
 or web workers if in the browser.  Java can use fork/join or parallel streams.  Clojure can use agents, refs or the
 core.async lib.
 
-## purescript Concurrency and Parallelism
-
-Since purescript runs on a javascript engine, we have to use a combination of what the language provides and what the
-javascript engine can handle
+## Haskell and eta
 
 - continuation monad
-- purescript-aff for asynchronous or delayed computations
-- node cluster
-- reactive
-- *shared memory*
+- MVars
+- Build reactivex for eta
+
+## Rust
+
+- reactivex for rust
+- Arc (atomc ref count)
+- *shared memory* for rust/webassembly/ecmascript
 - *SIMD*
+
+## javascript
+
+- rxjs
+- *shared memory
 
 ## Java
 
 Java 8's concurrency story has improved with java 8.  It has become more monadic
 
-- CompleteableFuture
-- Fork/Join pool
-- reactive
-- parallel streams
-- JavaRx (reactive for java)
+- Java 9 Flow
+- RxJava (reactive for java)
 
 ## Javascript (ES6)
 
@@ -100,7 +126,7 @@ For example, I would like to create a modified gherkin syntax parser such that I
 
 ## Monadic parser combinators
 
-Explain what they are and write a parser.  
+Explain what they are and write a parser.
 
 For work related purposes, I want to build a parser for a slightly modified gherkin style format.
 
@@ -146,6 +172,7 @@ OS running an isolated process.
 There are many parts to learning docker:
 
 - dockerfile
+- ansible-container
 - docker-compose
 - docker-engine
 - volumes
@@ -167,12 +194,13 @@ libraries, and other idiosyncracies.
 
 ## Java
 
-- Gradle is the build tool of choice nowadays.  
-- JMS is a good skill to learn
-- Vertx
-- RxJava
-- slf4j
-- maven central
+- Gradle is the build tool of choice nowadays
+- JMS is a good skill to learn for messaging
+  - kafka another good alternative
+- Vertx for reactive microservices
+- RxJava for reactive style state handling
+- slf4j because logging is confusing but important
+- maven central because you need to put your artifacts somewhere
 - class loading
 - reflection
 
@@ -199,50 +227,31 @@ Is the reactive library for java programming.  Related to vertx, it can be used 
 driven style of async programming which, though it requires some extra plumbing, looks easier to read than nested call
 back hell.
 
-## Purescript/Javascript
+# Web ecosystem
 
-**UPDATE** 
+The GUI is the browser.  Learning how to build front end web apps is never a bad thing.  There is a ton to learn
 
-Sadly, purescript has been too volatile to be practical to use.  Moreover, they are still using bower, which is on 
-life-support, as its dependency manager.  So, I think purescript is not ready for prime time
+- webpack: for building and asset management
+- react or cyclejs: for view layer framework
+- mobx or rxjs: for state management
+- bulma or bootstrap: for css framework
+- typescript: dont use es6
+- ramda: functional goodies for javascript
+- static-land: functional types for typescript
+- immutable:  immutable data structures
+- graphql: because REST is too bloated
+- graphdb (orientdb: for backend storage
 
-Lots of work here.  Need to learn more javascript libraries, and how to debug javascript apps.
+Then there's the Web APIs
 
-- Bower for dependency management
-- pulp for the build tooling
-- purescript-rx the reactive bindings
-- purescript-aff for asynchronous programming
-- purescript-node* all the node related libs, especially stream, buffer, process and child-process
-- purescript-halogen for front end web page
-
-### bower
-
-Bower is used instead of npm for package management.  
-
-### pulp
-
-Is the main build tool for purescript, and calls the psc compiler to generate the javascript code
-
-### purescript-rx
-
-The reactive bindings for purescript.  I think that the reactive style will probably be the way to go for a lot of the
-purescript functionality.  Monad transformers are hard to write and even if reactive is too, it has some interesting
-side benefits too (like being able to announce to interested parties about an event) that the monad transformers dont
-
-### purescript-aff
-
-An alternative for handling async programming.  I'm having a hard time getting makeAff to fit the types of certain async
-functions.  For example, how do you get makeAff to play nice with spawn?  But, if I can get this to work, I will use it
-as it seems easier than monad transformers.
-
-### All the purescript-node* modules
-
-Since I'll be doing a lot of client side programming for work, I need to get familiar with both node, and how purescript
-calls the foreign node functions.
+- WebRTC: for video cam
+- WebGL: for 3d graphics
+- Websockets: for bidirectional async communication
+- DOM: got to know how the DOM works for react and CSS
 
 # Networking fundamentals
 
-It never hurts to understand network technologies.  
+It never hurts to understand network technologies.
 
 - Become familiar with TCP/IP handshake
 - Learn tcpdump/wireshark
@@ -261,8 +270,8 @@ trust managers.  Others use CA certs in different formats
 
 ## HTTP 1.1 and HTTP 2 protocols
 
-HTTP2 is mostly a "on the wire" protocol (ie, a transport protocol) but the HTTP1.1 protocol still applies at the
-application layer.  Knowing the status codes and how things work are useful
+HTTP2 mostly changes how things work "on the wire" but the HTTP1.1 protocol still applies at the
+application layer.  
 
 - read the websocket protocol
 - read the websocket API

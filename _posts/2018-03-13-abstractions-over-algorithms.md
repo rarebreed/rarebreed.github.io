@@ -4,9 +4,10 @@ title:  "Abstractions over algorithms"
 date:   2018-03-13 20:41:00 -0400
 categories: FP, FRP, culture
 ---
+# Abstractions are how you think, algorithms are what your code does
 
 I was reading an [interesting article][-cont-monads] while trying to better understand different kinds of monads.  The
-brought up an interesting point that I had never really thought about that much.  The author said that he was more 
+author brought up an interesting point that I had never really thought about that much.  The author said that he was more
 interested in algorithms than abstractions.  As I digested that, I realized immediately that I didn't concur with him.
 
 But what did he mean by abstractions?  In the context of that article, he mentioned programming languages specifically,
@@ -30,7 +31,7 @@ I would argue that no, they are not.  The reason is that the algorithms you choo
 you have, and the data structures you need/have are highly dependent on the problem you are working with.  If for example
 you need to work with possibly infinite data structures, how is any kind of graph or tree going to help you?  
 
-_How are infinite data structures even possible?_
+_Wait...how are infinite data structures even possible?_
 
 They are all over the place.  Lots of mathematical calculations (sequences and series) are effectively infinite unless 
 they are asymptotic.  But in the "real world" everytime you click on a mouse or a keyboard, you are entering data.  This 
@@ -60,14 +61,14 @@ top of my head again).
 But state...that's the million dollar problem.  I got into Functional Programming to try to combat it, and when I read
 Rich Hickey's article about "State, you're doing it wrong", I like had this epiphany.  Or maybe it was a nightmare.  But
 I just remember thinking, "oh my god, he's right".  And Functional Programming required a whole new slew of data 
-structures to be invented.  Clojure for example, most uses special tries for their associative containers.  But any
+structures to be invented.  Clojure for example, mostly uses special tries for their associative containers.  But any
 data structures you learned prior to about 2010 were probably all mutable data structures.  And since your data types
 were mutable, your algorithms often mutated them.  Which means that all those fancy data structures and algorithms you 
 learned in school were worthless in a FP environment.
 
-Not to mention that imperative languages mostly don't deal with laziness.  The recent trend in languages is to introduce
-generators of some kind, or close cousins like streams.  But it's only been relatively recently that these kind of data
-generating functions were even considered unless you were a hardcore PLT guy.
+This doesnt mention the fact that imperative languages mostly don't deal with laziness.  The recent trend in languages
+is to introduce generators or coroutines of some kind, or close cousins like streams.  But it's only been relatively 
+recently that these kind of data generating functions were even considered unless you were a hardcore PLT guy.
 
 And all of this is because managing state becomes much much easier when you can't mutate it.  My point however is that
 data structures and algorithms are highly dependent on your use case and programming needs, whereas on the hand your
@@ -86,7 +87,7 @@ limp by) but more importantly, to study relationships.  When you study groups, r
 isomorphisms and homomorphisms, what the class is really training you to do is to see patterns between what seems 
 like unrelated concepts.
 
-_Oh man.  Are you one of those Ivory Tower white beards who looks down on everyone and throws out words like Endofunctor?_
+_Oh man.  Are you one of those Ivory Tower whitebeards who looks down on everyone and throws out words like Endofunctor?_
 
 Ok, first off, that's a childish and silly attitude to have.  Unfortunately, I see this attitude a lot in comments I
 read.  It's almost like there's a geek backlash, because some geeks feel like they aren't geeky enough, and have to 
@@ -96,13 +97,15 @@ hard to learn about abstractions, but it is helpful, and there's a lot we can le
 
 _Like what?  How is knowing what a comonad is or a functor is supposed to help me?_
 
-Perhaps you are familiar with SOLID principles?  How come no one ever made of Liskov Substitution?  And what about all
-those Design Patterns the Gang of Four and others highlighted?  I never heard the OOP crowd make fun of these before.
-But once we are presented with terms like Monoid, Monad, Arrows, Combinators etc, people start freaking out.
+Perhaps you are familiar with SOLID principles?  How come no one ever made fun of Liskov Substitution?  And what about 
+all those Design Patterns the Gang of Four and others highlighted?  I never heard the OOP crowd make fun of these 
+before.  And most people didn't seem to have a problems with Design Patterns like the Observer, Singleton, or Visitor
+Patterns because those words come from the common vernacular as opposed to mathematical jargon like Monoid, Monad, 
+Arrows, Combinators etc. People start hearing those terms freaking out.
 
 Those words just happen to come from Category Theory (or lambda calculus), and they are the mathematical equivalent of
 Design Patterns.  In fact, Monads have become ubiquitous (or maybe I just see them more, now that I know what monads 
-are).  
+are).
 
 - Are you a javascript programmer that's used Promises?  Guess what, you used a monad.
 - Have you used reactive libraries?  Guess what, Observables are monads
@@ -131,6 +134,10 @@ process. The same is with monads.  If you don't know what a monad is, you fail t
 out there that can solve your problems, just like Design Patterns are "cookbook" like blueprints to solve well-known 
 problems.
 
+By learning new abstractions, you aren't just adding a new tool to your tool belt.  You are learning a potential new
+way to wield the tools you _already know_.  Monads are not unique to haskell.  As I mentioned earlier, Promises and
+Observables are also monadic.  So is Java 8 streams.
+
 ### Does it go deeper?
 
 If we can apply the Sapir-Whorf hypothesis to computer languages, then wouldn't learning new formal languages actually 
@@ -144,4 +151,4 @@ calculus can actually be helpful.
 Speaking of which, I should brush up on the first chapter of Haskell from First Principles which is entirely dedicated
 to the lambda calculus.  And from there finally understand what the Y-combinator truly is :)
 
-[-cont-monad]: http://blog.paralleluniverse.co/2015/08/07/scoped-continuations/
+[-cont-monads]: http://blog.paralleluniverse.co/2015/08/07/scoped-continuations/

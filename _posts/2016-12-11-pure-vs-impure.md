@@ -125,30 +125,6 @@ because in many ways, they are the same.  What has changed is that the Functor f
 still carries the mapping of a to b.  The magic then is _what is this extra information_?  As explained earlier, the
 type (which implements the Functor) _is_ the extra information (or context).
 
-<<<<<<< Updated upstream
-## Functions as types
-
-First, let me start off by saying I hadn't really thought of functions as types, but it makes perfect sense.  How else
-would you be able to treat functions as first class citizens unless they had a type?  The **->** operator is actually
-a type constructor for a function.  You will also see mention of _kinds_ from time to time.  Here are some examples of
-different kind types:
-
-{% highlight haskell %}
-* -- a fully qualified, ie concrete, type
-* -> * -- a function type.  Since a constructor is a function, this can be seen as a Type that takes one parameter
-* -> * -> *  -- a type constructor that takes to parameters, etc
-# !  -- (purescript only) a row of effect types
-# * -- a row of types (ie, a record)
-{% endhighlight %}
-
-Since a function is a type (really, it's an element of a morphism in a category), that means that when a function takes
-another function as an argument, the passed in function must have the same type required by the calling function.
-
-{% highlight haskell %}
-getKey :: k -> Map k v -> Maybe v
-getKey k (Map key )
-{% endhighlight %}
-
 # Applicatives
 
 Applicatives are a combination of a Functor and a Monoid.  They have the mapping aspect of a Functor with the "smashing"
