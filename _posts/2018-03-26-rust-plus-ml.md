@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "What do rust, ML and algorithms have in common?"
+title:  "What do rust and ML have in common?"
 date:   2018-03-26 18:21:40 -0400
 categories: rust ml
 ---
@@ -84,13 +84,14 @@ One of the things I really hated about c(++) programming was just building stuff
 got popular, but even when I looked at it, it didn't seem to help that much.  And heaven help you if you had to write
 autoconf or automake scripts.  I spent as much time fighting compilation issues as feature bugs.
 
-So rust's modules and crate system is awesome.  The #include system of c(++) should have died ages ago, but never did.
-And if you did c++ templates, you had to write your implementations in the header files, which never made sense to me.
-And remember all those inclusion header guards?
+So rust's modules and crate system is awesome.  The #include system of c(++) should have died ages ago but never did.
+And if you did c++ templates, you had to write your implementations in the header files which never made sense to me.
+Remember all those inclusion header guards you had to write?
 
 Rust's modules feel like any other module system.  I have not yet figured out if it solves dependency version hell. But
 this is definitely the right direction.  The toml files are nicer than makefiles (don't forget the tabs!).  I even 
-used waf, which was a build system written in python for c(++) projects which was a bit nicer, but still pretty ugly.
+used waf a little, which was a build system written in python for c(++) projects which was a bit nicer, but still pretty
+ugly.
 
 For some people, the biggest selling point of rust is going to be easier memory management.  Or at least, it seems that
 way.  Afterall, there's no new/malloc or free/delete in rust!  It does have a Drop Trait however, which would be the
@@ -99,7 +100,7 @@ gone into those yet though.  Nevertheless, if you know c++ style RAII, rust's co
 is how rust becomes memory safe.
 
 For me though, the biggest sell is rust's abstractions.  c++11 and beyond added lambdas finally, but it doesn't have
-pattern matching, and while you can probably fake Sum types using template programming, that would just be gross.  Rust
+pattern matching.  And while you can probably fake Sum types using template programming, that would just be gross.  Rust
 ticks off most of my feature wants:
 
 - immutable by default
@@ -111,14 +112,14 @@ ticks off most of my feature wants:
 I think I am ready to go back into a language that doesn't treat you with kid-gloves.  Inevitably, in a higher level
 language you will hit some strange and bizarre error.  And then you will stare at it blankly, for a long long time.
 Trying to get your debugger to go deeper and deeper into the guts of some library, or worse, the runtime of the 
-language.  When there is too much hand-waving going on, and your language tells you "please don't look at the man
-behind the curtains", this can bite you bad.  Sure, having to work with raw bits, bytes, and native executables may
-seem scary, but they are also for the most part exposed.
+language is fraught with peril.  When there is too much hand-waving going on, and your language tells you "please don't
+look at the man behind the curtains", this can bite you bad.  Sure, having to work with raw bits, bytes, and native 
+executables may seem scary, but they are also for the most part exposed.
 
 Lastly, I am seriously impressed with the compiler error messages.  It practically tells you how to fix your code.
 Granted, it's been a few years since I did c(++) coding, and the clang compiler did improve things quite a bit, but
-sometimes I wanted to smash my face through the monitor trying to figure out byzantine error messages (ever forget
-to put a semi-colon at the end of a class or struct?)
+sometimes I wanted to smash my face through the monitor trying to figure out byzantine error messages. Did you ever 
+forget to put a semi-colon at the end of a class or struct?
 
 ## The bad
 
@@ -166,7 +167,9 @@ let t = s;   // String does not have the Copy Trait, so t now owns the contents 
 ```
 
 The difference between what moves and what is copied means you as a programmer have to know what Traits it supplies
-when you do assignments.
+when you do assignments.  It's not bad per se, but the idea that rust frees you from worrying about memory is not
+true.  It eliminates a few headaches of c(++) (who is responsible for cleaning up heap allocated data?), but it 
+introduces new wrinkles to consider.
 
 ### Lifetimes 
 
@@ -189,7 +192,7 @@ function), they seem fairly complex.  This is mainly due to their being 3 differ
 ## The ugly
 
 There's just a lot about rust I still don't know.  I haven't looked at Box, RC, ARc, or some other heap related data
-structures.  There's also a ton to learn about the standard libraries.  I don't really know about the rust ecosystem
+types.  There's also a ton to learn about the standard libraries.  I don't really know about the rust ecosystem
 so I dont know what libs it has or doesn't have.
 
 # What does rust have to do with Machine Learning, front end react apps or microservices ?
@@ -203,9 +206,9 @@ This is some nice data for analysis dont you think?  Time to crunch on it.
 
 Now, the most popular languages for ML seems to be python, R, and scala at the moment.  Frankly, I really scratch my
 head why python is so popular for AI.  I think I know why.  Many statisticians and data scientists are really Math
-majors at heart, and didn't really learn heavy duty programming languages.  So they like python (and R) for how easy
-they are to learn.  But I have issues with any language that doesn't to this day have some kind of const or final.
-And the speed?  More like the lack of.
+majors at heart and didn't really learn heavy duty programming languages.  So they like python (and R) for how easy
+they are to learn.  However, I have issues with any language that doesn't to this day have some kind of const or final.
+Not to mention that python leaves a lot to be desired in the speed category.
 
 So what about scala?  While scala is marginally interesting, it's like a shadow imitation of haskell.  I remember 
 reading a post from Edward Kmett about how broken Scala's type system was, especially when it started to use
