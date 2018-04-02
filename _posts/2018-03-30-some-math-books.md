@@ -189,7 +189,7 @@ one mapping of one Vertex to another Vertex, it can be a mapping of one Vertex t
 
 For example given this graph:
 
-![Digraph](https://drive.google.com/open?id=1cRo9KXE7sK7EbxxIxVJkTaY8Z7GOxabj)
+![Digraph](https://lh3.googleusercontent.com/BCsUfWu_jsOPCJb3Wq9U7oE3wXSfqYfYIlygjnaSzPthkvg11X3mq50jGU72sYmIrXeSwMMH681q71dPoqgHu1qXFdmsE41zrZLw23TP3edRKboT6G8VchkKdQTcKP334fo1SrkR3QExbCPcQ-h7SgGjafS3Mr1hPAmcjxp54z0uaK-r84oCVjogxRFKMgkQ7WKcMPuIaUgtFP5yliW3czOPfqeFGhoWXvzUMpHzRbJeSsPizxzJss7B9niadaQz8D5onQW_hVNO1mwHyFOj7Ju9QIMCJXvY4ZIPiDRaSkFJ7rx1FR3ZWq8eb8jnZnTjmeWZMwK5D5PHh3KQoTKemj8AaJwJWAaLyAGkLsVDYB2SYNRP_4GnMBcKEHgEs2KbFF3wwFAOqtD6pYK5PHVsMld2qNIXL_ZV7Fzrzin9yVyPgfFvFhjZ0Oeg1EixxAfHvZPVvl59HPEZmbP6sXv1GioAhpFElBT9tapNvjOg_ikpfWigOCjsx2XarmfVtqZOsjH1p9ZCdfiXBYJ_c_JYervQm2CDYlaUuQwAQd0lX0Wb7cdyBmMEgURhkmWhS5_DJYTu5ERjcAI0H8CrTJnz0a8V_tmGXUIf16yZXeU=w700-h540-no)
 
 How could we describe this data structure?  While we could still use an adjacency matrix for this, we would have to use
 Edges for the columns, and then have different numeric values for the direction.  It also would lose the efficiency 
