@@ -104,6 +104,8 @@ O(1) look up for an edge with a vector of vectors).
 
 **What about directed edges?**
 
+![Undirected Grapgh](https://lh3.googleusercontent.com/EPVsH5sQafBNCpK7BjZZRE1j_2muqEk-NbI1yu37LqOp-prlyucTo1VJxfPcbNVBZ-dT3PYmRAsJ7KZn8jhECR8ZSET1FVi9bv_lDzBQ3GbkzKpdVvi7GFrK01KX2OGcM84yaX-VvyvRJeCsZIRvil6DnYFNBUhJrAx6NVa7FrxCSvOw6qm8AxdLmm4WpY10YLx5MsmK0alqHXQ7RsHvFllPjVA1dm4HDwfjgIiMKy1aJgnJ5uq46gA5DekmtEU1qTeSnMK4cozww2Qf88rMO57YRPctnd5B4wG5FDK3GOd41GojuYnAbgZWPMUaaphqrx5qc5DtkjNEIT3325s_F94Pessd0CqBGrXywZ6U8JElIvihFw1vP2b7MNv7xb-cbro6q9MIl0jQCjgYxvJLH76rkJ7wuwUHEypABt6555UGVwMf0aQObXC4BhBq3ZGI-kU-lz0H16k4DvZSOkNZj3HqXi7mEAS9qzAohHPq2uJC5hPj05cIHD_EN5yoTiPIAy33WkJGDbzBGqhiei8jhWsCbhQqZDVxR4mo64lNPTXZJgapb0-VESTIFKOIsu7dZFI6haIUMXRLw-eVcGiRl7V81VcvljbtOziX-Nw=w768-h612-no)
+
 Let's assume we model a graph something like this (as a vector of lists):
 
 ```
