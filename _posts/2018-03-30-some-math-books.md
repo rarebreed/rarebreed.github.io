@@ -231,7 +231,7 @@ the vertices.  This would be O(n).  If I know the name of the edge, this will be
 underlying map implementation (hashed maps are nearly constant time lookup, while tree based maps have logarithmic time
 lookups on average assuming balanced trees).
 
-Another possibility is to sort the edges.  For example, if the key is an Edge itself rather than a String, then 
+Another possibility is to sort the edges.  That way you could got logarithmic lookup times.
 
 ### Graph features and algorithms
 
@@ -312,11 +312,12 @@ graph (either mutating a Vertex or Edge struct), we would either:
 - Need a mutable reference
 - Or take ownership of the vertex or edge
 
-But how can we have each thread communicate changes in state?  For example, let's say this was a reactive solution.
-The shared object is a Subject as are each of the threads.  As each Observer thread can:
-
-- Work on its local copy
-  - Add or  
+But how can we have each thread communicate changes in state?  I need to ponder on this one some more as well as read
+up on how rust does concurrency.  Currently, I can't think of how reactive (or other message passing techniques) will
+work without each thread containing it's own local copy of the data.  But that would be very wasteful.  And they cant
+use a reference either (because rust only lets one thing own a mutable reference).  So either they each contain a local
+copy of a visited queue to know what vertices have been visited (which gets expensive in terms of memory used) or we 
+use shared memory and pass ownership of the mutable reference back and forth between threads.
 
 ## Rust Mathematics with traits
 
@@ -364,13 +365,26 @@ fn factorial_<T, A>(n: T, acc: A) -> A
 ```
 
 Unfortunately this does not work.  The first error occurs because although I have specified the Eq trait on the n type, 
-when  it gets to n == 0, the compiler says it was expecting a type of T, but got an {integer} instead.  My guess here 
-is that although we have some operations available on n, rust is still seeing n as a T type.
+when  it gets to n == 0, the compiler says it was expecting a type of T, but got an {integer} instead. 
 
 I started browsing around rust to see how to resolve this issue.  If you think about, the error makes sense.  I am 
 comparing n, which is a type of T, to 0 which is an integer.  Even though I specified that T must support the Eq Trait,
 that only means that I can compare two T types (eg given t1: T and t2: T, I can do t1 == t2).  I believe I have come 
 across the solution, but I need to digest it a bit.  The solution seems to be the From and Into traits.
+
+In a nutshell, I need to have a higher level Integer type of which T is a type of (eg <T: Integer>) and that it 
+implements a From trait, so that I can do:
+
+```rust
+fn factorial_<T, A>(n: T, acc: A) -> A
+    where T: Mul + Sub + Copy + Eq + Integer {
+    if n == Integer::from(0) {
+        return acc
+    }
+    let m = n - 1;
+    factorial_(m, acc * n)
+} 
+```
 
 ## Think in traits not classes
 
