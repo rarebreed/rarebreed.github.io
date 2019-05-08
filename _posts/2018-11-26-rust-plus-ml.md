@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "What do rust and ML have in common?"
-date:   2018-03-26 18:21:40 -0400
+date:   2018-11-26 18:21:40 -0400
 categories: rust ml
 ---
 # Learning project for rust
@@ -11,7 +11,7 @@ need to be able to kill two birds with one stone.  Practically speaking, this me
 align well with what I am doing at work.  The sad fact is that once I am done with work, my brain is mostly dead.  I
 can still read about tech, I just can't practice.
 
-Since I am doing more networking and full stack kind of work, I was trying to figure out what I could do with rust.
+Since I will be doing more networking and full stack kind of work, I was trying to figure out what I could do with rust.
 There was some talk at work where a guy had an open source project about using some Machine Learning algorithms to help
 with QE related stuff.  For example:
 
@@ -33,7 +33,7 @@ So it dawned me, why not learn Rust and ML at the same time?
 
 ## Why rust?
 
-Perhaps one might be wondering if my work is currently mostly microservices and front end web stuff, why I would want
+Perhaps one might be wondering if my work is currently mostly microservices and back end stuff, why I would want
 to be getting into rust.
 
 First off, rust is the only language that can truly run anywhere.  Rust can now compile down to webassembly, and firefox
@@ -56,29 +56,37 @@ in town.
 The little bit I have played with rust and read up on it, it does not feel like your grandfather's system programming
 language.  There's so much that has improved, that it almost feels like coding in a much higher language like kotlin.
 
-- Modules (no #include of static code!!)
-- Crates (rust's version of npm, pip, maven, etc)
-- toml instead of hideous make or cmake files
+- Build system
+  - Modules (no #include of static code!!)
+  - Crates (rust's version of npm, pip, maven, etc)
+  - toml instead of hideous make or cmake files
 - Higher level abstractions than Java or even Kotlin (really Kotlin...no pattern matching?)
   - enums which are like haskell Sum Types
   - pattern matching and destructuring (though I have not seen pattern guards)
-  - impl solves the _expression problem_ for rust
-- I know people give elm mighty props for having awesome compiler error messages, but it would be hard to beat rustc
+- Awesome compiler error messages
 - Don't have to worry when to malloc/free or new/delete (but see below)
-- No black box
+- Native binaries
+- Very little black box
+- Safe concurrency including both shared memory and message passing
+- Able to truly run anywhere, including baremetal microcontrollers with no OS and limited memory
 
 There are a couple of rough spots though:
 
 - No tail call optimization
-- Lifetimes are pretty gross looking, and hard to wrap your head around
+- Lifetimes are pretty gross looking and hard to wrap your head around
 - Who thought shadowing was a good idea?
 - Instead of memory management ala C(++) to keep track in your head, you have ownership management to keep track of
-- higher order functions get complicated
+- Higher order functions get complicated
   - Fn, FnMut and FnOnce
   - Closures have anonymous types
-
+- [Confusing when to choose `&Trait`, `dyn Trait`, `impl Trait`, and `Box<Trait>`][-confusion-traits]
+- Not very good documentation on macros
+- Not very good documentation on rustc attributes (eg [!no_mangle])
+- Interop with C is almost like a second language (eg unsafe, and raw pointers)
 
 ## The good
+
+### Build system
 
 One of the things I really hated about c(++) programming was just building stuff.  I did c(++) programming before cmake
 got popular, but even when I looked at it, it didn't seem to help that much.  And heaven help you if you had to write
@@ -93,21 +101,27 @@ this is definitely the right direction.  The toml files are nicer than makefiles
 used waf a little, which was a build system written in python for c(++) projects which was a bit nicer, but still pretty
 ugly.
 
+### Easier memory management
+
 For some people, the biggest selling point of rust is going to be easier memory management.  Or at least, it seems that
 way.  Afterall, there's no new/malloc or free/delete in rust!  It does have a Drop Trait however, which would be the
 equivalent of a destructor in C++ parlance.  There's also Box<T> types, which are like smart pointers.  I haven't
 gone into those yet though.  Nevertheless, if you know c++ style RAII, rust's compiler essentially enforces it.  That
 is how rust becomes memory safe.
 
+### ML'ish abstractions
+
 For me though, the biggest sell is rust's abstractions.  c++11 and beyond added lambdas finally, but it doesn't have
 pattern matching.  And while you can probably fake Sum types using template programming, that would just be gross.  Rust
 ticks off most of my feature wants:
 
-- immutable by default
+- Immutable by default
 - Traits which are like java interfaces or haskell typeclasses
 - impl which are similar to haskell's class and solve the expression problem (types are open for extension)
 - enums which are like haskell Sum types or Typescript's Union types
 - higher order functions (though these are a bit messy)
+
+### Reduced black box
 
 I think I am ready to go back into a language that doesn't treat you with kid-gloves.  Inevitably, in a higher level
 language you will hit some strange and bizarre error.  And then you will stare at it blankly, for a long long time.
@@ -116,10 +130,53 @@ language is fraught with peril.  When there is too much hand-waving going on, an
 look at the man behind the curtains", this can bite you bad.  Sure, having to work with raw bits, bytes, and native 
 executables may seem scary, but they are also for the most part exposed.
 
+### The compiler is your friend (not your enemy)
+
+Sometimes, while programming in rust, I have been seriously confused why rustc won't let me do something.  Of course,
+I think I am right, and the compiler is wrong, but really...it's me not understanding something.  Also, while it may
+feel like you are fighting the compiler, the compiler is doing you a solid by preventing you from doing something.
+While it is possible to circumvent some of the compiler's guarantees (that's what `unsafe` is for) because the
+compiler can't know everything, for the most part, it's there to have your back and prevent you from doing something
+that could be harmful.  
+
+I will even go so far as to say that I think people have it wrong when they talk about how "easy" languages are better
+because they let you be more productive more quickly, and they are dismissive that another safer language (eg haskell
+or rust) is safer since they can't be proven to be less buggy than some other language.  In this mindset, since one
+can't prove whether languages written in so-called safer languages can't be proven, but is more difficult to learn
+'safer' languages, there is no proven benefit to using the so-called safer language, and is in fact detrimental since
+there are less engineers capable of writing in these safer languages.
+
+But I think this is akin to saying something like "people who eat a healthy diet in a war zone don't live longer than
+other people, so eating healthy is not beneficial".  It is simply false to say that static typing isn't safer, because
+it eliminates entire classes of bugs.  Rust removes entire classes of thread safety bugs as well as memory bugs (and
+yes, this includes other languages runtimes...what do you think node, go or java are written in?).  Amazon chose rust
+for their firecracker microvm, because they explicitly wanted safety and security guarantees (which presumably go 
+could not give them).
+
 Lastly, I am seriously impressed with the compiler error messages.  It practically tells you how to fix your code.
 Granted, it's been a few years since I did c(++) coding, and the clang compiler did improve things quite a bit, but
 sometimes I wanted to smash my face through the monitor trying to figure out byzantine error messages. Did you ever 
 forget to put a semi-colon at the end of a class or struct?
+
+### Better concurrency
+
+The go language is all the rage these days primarily for two reasons:  1) it's easy and 2) go channels
+
+Go made concurrency easy, and along with it's ease of learning, many new projects were created.  But the problem is
+that go channels are not foolproof.  They suffer from data races, deadlocks, and corruption.  Also, they can only
+work through message passing: "Do not communicate by sharing memory, share memory by communicating".  While it's a
+catchy aphorism, this is not always the ideal solution.
+
+Fact of the matter is, sharing memory is simply faster, sometimes orders of magnitude faster (sharing memory can
+go through cache, while passing messages has to pass through the cores and other memory access).  The problem with
+shared memory is safety.  But rust is able to get around the dangerous of shared memory by enforcing some rules.
+
+This means that in rust, you have a choice of what kind of communication method you want to use between cores.
+Moreover, not only is its shared memory implementation safe from just about everything (except livelock/deadlocks),
+so is it's message passing implementation with Send/Recv traits.
+
+### Run anywhere
+
 
 ## The bad
 
@@ -137,8 +194,8 @@ _borrowing_.  You have two kinds:
 
 You can have as many immutable references to a variable as you want, or a single mutable reference, but you can **not**
 
-- have immutable and mutable references to a variable
-- more than one mutable reference
+- have immutable and mutable references to a variable (in the same scope/lifetime)
+- more than one mutable reference (in the same scope/lifetime)
 
 ### Move vs. Copy semantics
 
@@ -178,6 +235,31 @@ book even states that lifetimes are actually the defining feature of rust since 
 think I understand what they are for, but figuring out when I need to use them is not so clear to me.  For now, I will
 just let the compiler yell at me until I get a better intuition for when I need them.
 
+One more common use case for lifetimes is when you have a struct with a borrowed instance in a field.  For example,
+you might have this:
+
+```rust
+struct Emploee {
+    name: &str,
+    position: &str
+}
+```
+
+You will get an error if you try to compile that, since name and position are references to (borrowed) strings.  To
+get around this error, you need a lifetime:
+
+```rust
+struct Employee<a> {
+    name: &'a str,
+    position: &'a str
+}
+```
+
+When looked at in this light, a lifetime is basically a kind of generic, which instead of specifying a type of some
+sort as the parameter, you are specifying a scope (eg a lifetime) as the parameter.  This says that name and position
+will live as long as the scope of _a_.  If the string that name or position references must live at least as long as
+the Employee object which refers to it.  If not, the compiler will throw an error.
+
 ### Closures seem difficult
 
 While rust does have support for higher order functions (functions that accept other functions, or can return a 
@@ -188,6 +270,14 @@ function), they seem fairly complex.  This is mainly due to their being 3 differ
 | Fn     | takes an immutable reference (&self)   | Pass by immutable reference
 | FnMut  | takes a mutable reference (&mut self)  | Pass by mutable reference
 | FnOnce | takes ownership of                     | Pass by copy
+
+This gets a little confusing when thinking about whether the closure needs to take control of the surrounding variables.
+
+### Dynamic traits
+
+Rust has a confusing set of options on how to deal with dynamic traits.  What's a dynamic trait anyway?
+
+Suppose you have a function, and that function wants to return something that 
 
 ## The ugly
 
@@ -264,3 +354,5 @@ to do this at all, depending on how webassembly FFI with javascript works.
 
 Most of the data I am shuttling around happens in real time.  We've got messages from the ActiveMQ bus, DBus events from 
 the subscription-manager, log output from tests, and some others.  Why not crunch on that data as it comes in?
+
+[-confusion-traits]: https://joshleeb.com/posts/rust-traits-and-trait-objects/
