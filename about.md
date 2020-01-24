@@ -4,11 +4,6 @@ title: About
 permalink: /about/
 ---
 
-
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jglovier" %} /
-[jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+This is my little blog spot for topics ranging from functional programming, programming in rust,
+typescript or maybe even haskell or purescript.  I may meander about topics in software engineering,
+quality assurance, or management from time to time too.
