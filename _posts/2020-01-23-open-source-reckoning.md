@@ -103,9 +103,8 @@ doing), otherwise it will get just as bloated as running as a VM.  Furthermore, 
 isolate system calls and even doing IPC across container boundaries is relatively expensive.
 
 What the Bytecode Alliance is doing is creating "nanoprocesses" via the sandboxing that webassembly
-provides so that it can even lock down syscalls. Solomon Hykes, the founder of Docker, went so far
-as to say that had webassembly existed back in 2008, [he never would have invented
-Docker][-no-docker].
+provides so that it can even lock down syscalls. Solomon Hykes, the founder of Docker, said that had
+webassembly existed back in 2008, [he never would have invented Docker][-no-docker].
 
 I've always been a little bothered by the idea of docker.  Cgroups and namespaces I can understand.
 Those are very lightweight, and you can create rules for certain processes.  But bringing along a
