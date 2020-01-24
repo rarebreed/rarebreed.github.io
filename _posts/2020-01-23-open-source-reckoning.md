@@ -15,14 +15,16 @@ hands up in despair and pulled actix-web from github.
 In Steve's post, he talks about what he saw as a mismatch between what the rust community expects
 and what the lead maintainer was doing.  The rust community has an unwritten and unsaid expectation
 that the premiere benefit of rust is its safety.  The lead maintainer on the other hand felt that
-perhaps sacrificing a small amount of risk was worth increased speed (actix-web seems to crop up in
-the top 3 performing web server frameworks from Tech Empower).
+perhaps sacrificing a small amount of risk was worth increased speed.  I believe this was important
+to the developer since actix-web seems to crop up in the top 3 performing web server frameworks from
+Tech Empower.
 
 The rust community, generally known as being very nice and friendly, had a few members say some
-rather caustic things.  The maintainer appeared to be flippant (though the developer said that
-English is not his first language, so he was not perhaps trying to come off this way) when members
-would submit Pull Requests to get fixes that were just as performant, but also didn't require
-undefined behavior (eg, using unsafe) or exhibit unsoundness (eg using cells inappropriately).
+rather caustic things.  The maintainer appeared to be flippant, but one should take into
+consideration that the developer's native language is not English. So perhaps he was not trying to
+come off this way.  When members would submit Pull Requests to get fixes that were just as
+performant, but also didn't require undefined behavior (eg, using unsafe) or exhibit unsoundness (eg
+using cells inappropriately), some in the community took the author's non-commital badly.
 
 The end result of the bickering is that the maintainer said he had enough, was leaving open source
 entirely, and pulled the project with him (though it has since been [forked][-actix-web] under a new
@@ -53,10 +55,10 @@ not sufficient for a substantial number of users.
 The argument for some was akin to saying, if you loan out a car to people, but you know there's a
 .0001% chance that the breaks might fail, you have a duty and moral obligation to fix it before
 loaning it out.  It's not good enough to inform the person borrowing the car "hey, the chance is
-pretty slim, but the brake's might give out".  It's up to the user to decide whether they want to
-use the borrowed car or not.  Several people were quite adamant that the moral imperative, and thus
-the onus to fix the issue was on the lender of the car, not on the decision of the person to not use
-the freely offered car.
+pretty slim, but the brake's might give out".  Many did not buy that it's up to the user to decide
+whether they want to use the borrowed car or not.  Several people were quite adamant that the moral
+imperative, and thus the burden to fix the issue was on the lender of the car, not on the decision
+of the person to not use the freely offered car.
 
 This sense of entitlement leads to the next problem.
 
@@ -94,18 +96,19 @@ There's a [a new consortium called the Bytecode Alliance][-bytecode] that is try
 problem by working on webassembly technologies.  Why not just make code safer by running in isolated
 VM's or with cgroup/namespace protections via containers?  While VM's are more secure by having very
 rigid boundaries, they are also extremely heavyweight.  Moreover, if your process running in your VM
-needed to interact with another process, it'd have to do so using network IPC (not even named pipes
-or unix sockets).  What about containers?  Containers are more lightweight, but then you would have
-to guarantee that every program/process has a common base image (which is what Red Hat is doing),
-otherwise it will get just as bloated as running as a VM.  Furthermore, containers can't isolate
-system calls.
+needed to interact with another process, it'd have to do so using network IPC.  Not even named pipes
+or unix sockets would work.  What about containers?  Containers are more lightweight, but then you
+would have to guarantee that every program/process has a common base image (which is what Red Hat is
+doing), otherwise it will get just as bloated as running as a VM.  Furthermore, containers can't
+isolate system calls and even doing IPC across container boundaries is relatively expensive.
 
-What the Bytecode Alliance is doing is creating "nanoprocesses" that can even lock down syscalls.
-Solomon Hykes, the founder of Docker, went so far as to say that had webassembly existed back in
-2008, [he never would have invented Docker][-no-docker].
+What the Bytecode Alliance is doing is creating "nanoprocesses" via the sandboxing that webassembly
+provides so that it can even lock down syscalls. Solomon Hykes, the founder of Docker, went so far
+as to say that had webassembly existed back in 2008, [he never would have invented
+Docker][-no-docker].
 
 I've always been a little bothered by the idea of docker.  Cgroups and namespaces I can understand.
-Those are very lightweight, and you can just have rules for certain processes.  But bringing along a
+Those are very lightweight, and you can create rules for certain processes.  But bringing along a
 filesystem/runtime for your executable? I always felt like docker existed because the majority of
 programs were written in languages that didn't ship you a binary.  So docker was invented to ship
 everything you needed inside images.  And while they are lighter weight than VM's (VM's are
@@ -179,8 +182,55 @@ The slight delay is what makes flocks or schools of fish fascinating to watch, b
 software project, the individuals and teams do not have anywhere near real-time knowledge of what
 their neighbors are doing.
 
-How often have you been blind sided by what a sister team does to some project that you rely on, and
-now the API changed, or some new dependency was added, or worse, they abandon some project?  
+I often felt like my views on finding balance between non-hierarchical structure and needing a
+central orchestrator rubbed people the wrong way at Netflix.  The problem in any large structure as
+it grows and scales in size is not just "doing your own thing to cut out the red tape" or finding
+and hiring the best.  For example, there is a [slide][-slide] in the Netflix culture deck that shows
+that as a company grows, the talent density decreases, and this creates chaos.  To account for the
+chaos, process and procedure is used to give "guard rails" for the less talented.
+
+The argument goes that these processes works ok to curb the chaos, but:
+
+1. It limits or handicaps the truly gifted
+2. If the market shifts, all those hard coded rules are ingrained and hard to change
+
+The real problem, is that growth and scaling is not solved by hiring more "stunning" colleagues.
+Two of the biggest factors that causes chaos as an entity grows are:
+
+- Contention of resources
+- Consensus of decisions
+
+I find it funny how we understand these limitations technologically.  If we have a web service that
+starts getting hit more and more, or we have many threads waiting on a mutex, or we have consensus
+algorithms used in Raft or Blockchain, we go "of course as a software system grows in size and
+scale, we obviously have contention of resources and consensus problems".  So why can't we see this
+is true outside of software systems?
+
+As any entity grows in size or complexity, it becomes more specialized.  These specialized sub
+groups often rely on other groups.  What happens when Team A and Team B both need Team C?  I don't
+care how smart your engineers are: you have a problem.  The second problem is reaching agreement on
+what to do.  The more individuals and more teams you have, the more they think they have the right
+idea on how to solve a problem.  Some will say, well Team A has the right to solve problems the
+best way they know how.  At Netflix, this was called "Freedom and Responsibility".  You were free to
+do what you wanted, but you were responsible for the consequences (good or ill) of what you did.
+But F&R as we called it had it's own problems.
+
+In your own company how often have you been blind sided by what a sister team does to some project
+that you rely on, and now the API changed, or some new dependency was added, or worse, they abandon
+some project?  At some point, someone has to understand "the big picture" and guide everything
+along.  I have been at two companies during their "growth spurts" when they went from medium to
+large companies, and both of them suffered through these scaling and cultural pains.
+
+When your company is small, and a start up, the free wheeling, no process culture works great.  It
+keeps the company agile and able to act and react quickly.  But as it grows, or even as your project
+scales in size and complexity, this doesn't work.  Constraints control chaos.  
+
+What does this have to do with open source?  As an open source project grows larger and more
+popular, it is going to face contention of resources.  There might not be enough maintainers or
+contributors to keep up with bug fixes or new features.  More crucially, without some kind of vision
+for the direction of a project, the harder reaching consensus of decisions becomes.  Also, the wants
+of the community can become out of synch with the developers because in a way, the community also
+often affects the decision making process of what happens in the project.
 
 ## What can we do?
 
@@ -205,13 +255,13 @@ How can you make sure that someone can take care of code as quickly as possible?
 ### Should open source be treated as national/world infrastructure?
 
 We have real highways, and we have information highways.  Should open source code be considered in
-the same light as infrastructure, and you have paid people working on it?
+the same light as infrastructure, and you have paid federal employees people working on it?
 
 America's economy is, to a significant degree, floating upon the success of information technology.
 Could open source be considered a national resource in the same way that interstate highways are?
 If so many companies are relying on open source projects, then maybe these things need to be
 supported nationally.  Just as the highways facilitate trade and commerce, the same argument could
-be made for open source software that is standardized.
+be made for open source software that is standardized, audited, and regulated.
 
 Of course, then the question is, why should America be the only one supporting all these free
 projects that other countries can use?  It's a fair question, and one I don't have an answer to.
@@ -226,7 +276,7 @@ Other questions follow:
 	
 The government is a big user of open source since they don't particularly like the idea of some
 proprietary company having potential backdoors in their closed source code.  It would seem like it
-would be in the government's best interests to make sure that the codebase they are relying on, is
+would be in the government's best interests to make sure that the codebase they are relying on is
 as bug-free and secure as possible.
 
 ### Technical solution
@@ -234,13 +284,13 @@ as bug-free and secure as possible.
 I quite frankly don't think this will work, or at least, it won't work for a long time.  I could be
 wrong though, and I do admire the work that the Bytecode Alliance is doing in this area.
 
-I already pointed out the problems even with this webassembly nanoprocess based solution. How long
-will it take to create wasm compilers for every language out there?  Containers are already more
-safe than a stand alone solution, but not all software that is deployed uses containers.  Even the
-Bytecode Alliance solution requires some level of manual auditing to ask "hey, why does package X
-require write access to the filesystem?".
+I already pointed out the problems with the webassembly nanoprocess based solution. How long will it
+take to create wasm compilers for every language out there?  Containers are already more safe than a
+stand alone solution, but not all software that is deployed uses containers.  Even the Bytecode
+Alliance solution requires some level of manual auditing to ask "hey, why does package X require
+write access to the filesystem?".
 
-How often are you vigilant when installing android apps and it asks if you want to give an app
+How often are you vigilant when installing android apps when it asks if you want to give an app
 permission to read/write to the filesystem, or have access to the videocam or microphone?  Most
 often, we don't care, or we don't think about the ramifications.  For some, it may be an obvious red
 flag ("why does an app that retweets need read access of my filesystem?"), but for other apps, it
@@ -255,24 +305,41 @@ way to specify schemas which lead to other problems.
 
 Some will say that technology has provided us with new medicines that save lives or technologies
 like compostable one use utensils or electric cars.  I would retort that, often, medicines may have
-increased the longevity of life, but the cost to maintain that life increases.  Or the side effects
-of the medicine or treatments degrades the quality of life.  For environmental technology,
-compostable utensils still produce waste which can actually be harder to compost than recycling is.
-And electric cars may not emit greenhouse gases, but the construction of the batteries and other
-elements (and their disposal) can be just as damaging to the environment as a very fuel efficient
-car.
+increased the longevity of life, but the cost (monetary or otherwise) to maintain that life
+increases.  Or the side effects of the medicine or treatments degrades the quality of life.  For
+environmental technology, compostable utensils still produce waste which can actually be harder to
+compost than recycling is.  Worse, it makes people feel better about throwing things away instead of
+reuse. And electric cars may not emit greenhouse gases, but the construction of the batteries and
+other elements along with their disposal can be just as damaging to the environment as a very fuel
+efficient car.
 
 Everything in life is a trade off.  Some times technology has more payoff than liabilities, but then
 the new technology can be a victim of its own success.  Clearly, automobiles were superior to horse
-drawn carriages right?
+drawn carriages right?  Except that horse drawn carriages don't emit green house gases.
 
 I believe that the real challenge is often social or cultural rather than technological.  In the
 case of open source, I believe that the social solution (treating open source as a national
-resource) is a better solution than technological.  Or perhaps a combination of a technological
-solution with a social one.  For example, if we went the route of making open source a publicly
-funded resource like highways, schools or libraries, we could mandate having webassembly as a
-standard.  This way, you could consume the libraries from whatever language you are most comfortable
-with.
+resource) is a better solution than technological.
+
+In fact, technologies often just open up a can of worms, and more sadly, many in the software
+engineering profession don't consider the ramifications of their actions.  A few weeks ago, I was
+listening to a talk on National Public Radio about deep fake technology.  The technology to generate
+a person's voice after listening to just 40min of data, and being able to manipulate video to match
+the lip movement has become scary.  If you think there's "fake news" now...just wait.  What truly
+disturbed me though, was when the host of the talk asked one of the inventors of the technology if
+she thought about what it could be used for and what kind of damage it could do.  Her answer was
+basically, "well, it's not my problem, and if I didn't do it, someone else would have".  Look at
+Facebook's old "move fast and break things" motto (which they changed by the way).  I have come to
+feel now, that software engineers need to take an ethics course in college just like health and
+business majors do.
+
+As engineers, I believe we have become conditioned to think of technology as our go to tool to solve
+a problem.  We rarely, if ever, see technology _as_ the problem.
+
+But, technology is here to stay.  Could we combine a technological solution with a social one.  For
+example, if we went the route of making open source a publicly funded resource like highways,
+schools or libraries, we could mandate having webassembly as a standard.  This way, you could
+consume the libraries from whatever language you are most comfortable with.
 
 ## Conclusion
 
@@ -283,9 +350,9 @@ Open source is under attack not just from hackers, but often by demanding users 
 owed something for free.  The risk of abandoned software is often high.  There aren't many good
 solutions out there, and I seriously doubt (at least in America) open source will be treated as a
 national resource that gets publicly funded.  Or for that matter, I don't know if people will even
-like that idea (it's too socialistic for American tastes I think).
+like that idea as it's too socialistic for American tastes I think.
 
-The other solution, technological is I think chasing after a unicorn.  Engineers, being technical,
+The other solution, technological, is I think chasing after a unicorn.  Engineers, being technical,
 tend to think of problems as technical first, and cultural or social second.  But everyone would
 have their own idea on how to solve this problem technologically, but how would you enforce this
 system in a "weakest link" scenario?  It just takes one bad link to break the chain, so unless
@@ -295,7 +362,8 @@ Given the plethora or programming languages, operating systems, frameworks and l
 the same thing, I personally think it's a fools errand without also thinking about a social solution.
 
 [-bytecode]: https://hacks.mozilla.org/2019/11/announcing-the-bytecode-alliance/
-[-do-docker]: https://twitter.com/solomonstre/status/1111004913222324225
+[-no-docker]: https://twitter.com/solomonstre/status/1111004913222324225
 [-vulnerable]: https://arxiv.org/abs/1902.09217
 [-sad-day]: https://words.steveklabnik.com/a-sad-day-for-rust
 [-actix-web]: https://github.com/actix/actix-web
+[-slide]: https://www.slideshare.net/reed2001/culture-1798664/49-Chaos_Emerges_High_Performance_EmployeesChaos
