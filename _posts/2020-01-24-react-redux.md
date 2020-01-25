@@ -121,3 +121,4 @@ that others either have trouble understanding, or do not understand the value of
 
 [-mercury]: https://github.com/rarebreed/mercury
 [-khadga]: https://github.com/rarebreed/khadga
+[-seed]: https://seed-rs.org/
