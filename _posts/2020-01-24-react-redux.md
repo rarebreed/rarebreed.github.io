@@ -30,7 +30,7 @@ topic.
 
 Also, that was close to 2 years ago.  At Netflix, I had to troubleshoot a few front end apps, but I
 didn't really get to write any new stuff.  Since react and redux are hugely popular, I thought it
-wouldn't hurt to use them.  While I thought the [cyclejs][-cycleks] library is more interesting than
+wouldn't hurt to use them.  While I thought the [cyclejs][-cyclejs] library is more interesting than
 react, this leads me to the other reason.
 
 ### But why specifically react and redux?
@@ -122,3 +122,4 @@ that others either have trouble understanding, or do not understand the value of
 [-mercury]: https://github.com/rarebreed/mercury
 [-khadga]: https://github.com/rarebreed/khadga
 [-seed]: https://seed-rs.org/
+[-cyclejs]: https://cycle.js.org/
