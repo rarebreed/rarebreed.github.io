@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Rust, where you have been all my life?"
-date:   2020-01-13 18:21:40 -0400
+date:   2020-01-13 18:21:40 -0500
 categories: rust ml
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "A reckoning for Open Source"
-date:   2020-01-23 18:21:40 -0400
+date:   2020-01-23 18:21:40 -0500
 categories: rust ml
 ---
 

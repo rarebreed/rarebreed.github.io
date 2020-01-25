@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Boning up on some math: rust and graphs"
-date:   2018-03-30 15:40:00 -0400
+date:   2018-03-30 15:40:00 -0500
 categories: rust ml math
 ---
 Consider this blog post a meandering stream of consciousness.  I will perhaps ask more questions than provide 

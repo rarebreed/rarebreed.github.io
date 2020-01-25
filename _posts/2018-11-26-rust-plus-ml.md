@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "What do rust and ML have in common?"
-date:   2018-11-26 18:21:40 -0400
+date:   2018-11-26 18:21:40 -0500
 categories: rust ml
 ---
 # Learning project for rust
