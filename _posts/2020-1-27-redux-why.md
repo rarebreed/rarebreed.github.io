@@ -129,6 +129,11 @@ to return a copy of new data.  I now see why react+redux benchmarks are pretty p
 pretty bad.  I guess however that javascript devs aren't too concerned about performance.  Or maybe
 it's just redux users.
 
+Yes, I know that `redux.combineReducers` you pass it a reducer that only takes the state it is
+interested in rather than the entire state.  However, this is really just a helper function.
+Ultimately dispatch will pass the entire state at which point the state can be divied up among
+reducers that are combined in `combineReducers` 
+
 ### Reducers and async data
 
 Reducers should be pure.
