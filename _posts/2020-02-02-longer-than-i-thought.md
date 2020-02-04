@@ -25,10 +25,31 @@ One piece I still need to work on/learn is travis.
 
 I installed the `tokei` program using `cargo install tokei` because I was curious about how many
 lines of code I had so far.  It's a program similar in purpose to `cloc` but orders of magnitude
-faster.  I was surprised that in about a month's worth of work, I'd only written about 900 lines of
+faster.  I was surprised that in about a month's worth of work, I'd only written about 1100 lines of
 typescript and about 500 of rust.
 
-I felt like 1400 lines of code in a month's work seemed pretty slow.  But why?
+| Language            | Files    |   Lines     |   Code   |  Comments    |   Blanks
+|---------------------|---------:|------------:|---------:|-------------:|---------:
+| CSS                 |    2     |   10847     |    9139  |          3   |      1705
+| Dockerfile          |    1     |      19     |      12  |          3   |         4
+| HTML                |    2     |      29     |      27  |          0   |         2
+| JavaScript          |    4     |      41     |      39  |          0   |         2
+| JSON                |    5     |   14838     |   14838  |          0   |         0
+| Markdown            |   34     |    4902     |    4902  |          0   |         0
+| Rust                |   11     |     738     |     558  |         79   |       101
+| Shell               |    2     |      34     |      25  |          4   |         5
+| TOML                |    4     |      86     |      63  |         12   |        11
+| TypeScript          |   26     |    1468     |    1157  |        108   |       203
+| YAML                |    3     |      32     |      32  |          0   |         0
+|---------------------|----------|-------------|----------|--------------|-----------
+|Total                |   94     |   33034     |   30792  |       209    |      2033
+
+Admittedly, there's more work here than just typescript and rust.  I'm not sure where all that JSON
+comes from, because I told tokei to ignore any docs folders.  Also, tokei will read in .gitignore
+files it encounters, so it won't read in any extra folders (eg, node_modules, or directories that
+you compile your typescript to).
+
+I felt like 1600 lines of code in a month's work seemed pretty slow.  But why?
 
 ### React, redux and typescript
 
