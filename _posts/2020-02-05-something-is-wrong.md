@@ -11,7 +11,7 @@ I haven't written a non-technical blog in awhile, but maybe I'm finally facing a
 or maybe it's an existential crisis.  Deep down however, the feeling can't be ignored that there is
 something terribly amiss in today's world.
 
-Between news about climate change, the rise of strong men, nationalism and populism, the ever
+Between news about climate change, the rise of strong men, nationalism, populism, the ever
 growing tribal nature of human populations, and the increasing sense of isolation and inadequacy,
 it's hard not to feel a bit of despair.  I can only imagine how younger people must feel.  For me,
 two questions necessarily follow:
@@ -30,11 +30,12 @@ manifestations of some phenomenal effect and believe this to be the cause of oth
 
 What does this have to do with the ills of our world today?  Too often, one side or another will
 point fingers and say "if only people acted/thought/believed/felt like this, the world would be
-better place".  Slowly, over the last 20 years, this has changed to something vastly more dangerous.
-Now, people don't just think that others not in their same "tribe" aren't just misguided or foolish,
-but downright "evil".
+better place". We are mistaking a symptom of the disease for its cause.  This partisanship is not
+the cause of today's ills, but is I believe, a symptom of some other ill. Slowly, over the last 20
+years, this partisanship has changed to something vastly more dangerous. Now, people don't just
+think that others not in their same "tribe" aren't just misguided or foolish, but downright "evil".
 
-This is not good.  One should ask, why has this been happening more recently?  What has changed in
+This is not good.  One should ask; why has this been happening more recently?  What has changed in
 the last 30 years or so to have reversed what we thought was the end goal of liberal capitalistic
 democracy? Indeed quite a few people I have talked to no longer believe in democracy or capitalism.
 One of my nieces in the Philippines just reposted an article that people don't need more democracy,
@@ -43,33 +44,33 @@ made us do an about face.
 
 ## Technology is not the solution, it's the problem
 
-One can make arguments for many reasons we have seen a resurgence in populism, nationalism and
-identity politics.  In America at least, each party will point to the other as being at fault for
-the rise in identity politics, and this has definitely caused a huge swing in "us vs. them"
-mentality and a rise in tribal behavior.  I would argue however, that we've always had identity
-politics.
+One can make many arguments for why we have seen a resurgence in populism, nationalism and identity
+politics.  In America at least, each party will point to the other as being at fault for the rise in
+identity politics, and this has definitely caused a huge swing in "us vs. them" mentality and a rise
+in tribal behavior.  I would argue however, that we've always had identity politics.
 
 One could also posit that "free trade" agreements have created greater competition.  While this is
 great for business, it's not so great for the common person who now has to compete not just with
-local job contenders, but foreign ones too.  I often wondered why, during the 2016 election campaign
+local job contenders, but foreign ones too.  I often wondered why during the 2016 election campaign
 cycle, no one in the media wanted to ask a crucial question.  Trump was claiming that he would bring
 jobs back to America, but no one really bothered to ask how, or just as importantly, what the
-ramifications of that would be even if he could pull it off.  Walmart is cheap because many goods
-are manufactured overseas where they only have to pay employees $2/hr with no benefits.  Even if
-somehow many jobs came back home, the prices of goods would also go up.
+ramifications of that would have been even if he could have pulled it off.  Walmart is cheap because
+many goods are manufactured overseas where they only have to pay employees $2/hr with no benefits.
+Even if somehow many jobs came back home, the prices of goods would also go up.
 
 This competition created a lot of friction, both in economics, and in a rising sense of "the other"
 taking over. This loop only gets reinforced when the only news you hear purposefully only shows you
 news to make you angry.  Facebook and news sites like Fox or MSNBC know that you are more likely to
-pay attention if you become emotionally involved.  I miss the days of "old" news anchors who
+keep paying attention if you become emotionally involved.  And the more you pay attention, the more
+money they make off of advertising or subscriptions.  I miss the days of "old" news anchors who
 basically just told you the facts.  Nowadays, everyone is a talking head.
 
-More open trade agreements, andincreasing reliance on foreign skilled workers, and the information
+More open trade agreements, an increasing reliance on foreign skilled workers, and the information
 that viewers see, have all been driven by technology. The growth in the population and our ever
-growing technologically driven economy (and culture) demands more highly skilled workers. Everyone
-thought in the mid 90s that the web would end racism and bigotry, because information would freely
-flow and everyone would get to understand each other and the problems we faced.  There were two
-problems with this assumption:
+growing technologically driven economy demands more highly skilled workers. Everyone thought in the
+mid 90s that the web would end racism and bigotry because information would freely flow and
+everyone would get to understand each other and the problems we faced.  There were two problems with
+this assumption:
 
 - That facts will change people's minds
 - That facts would be transmitted over the web
@@ -88,9 +89,9 @@ manipulated by it, or how it actually increases the feeling of isolation and sen
 many of the people who use it.
 
 People will say "but we can use hydro, geothermal, solar, wave generation, etc, etc" to wean
-ourselves off of non-renewable energy (including nuclear).  But these have repercussions as well.
-Ask China about what the 3 Gorges dam did to the environment (and how it actually changed the
-Earth's rotation). How many [rare earth minerals][-rare-earth] will solar panels require?
+ourselves off of non-renewable energy (including nuclear).  But these sources have repercussions as
+well. Ask China about what the 3 Gorges dam did to the environment and how it actually changed the
+Earth's rotation. How many [rare earth minerals][-rare-earth] will solar panels require?
 
 Even advances in health care or disease control have its problems.  The increased life expectancy
 and decrease in mortality rates means that there are more humans than ever on this planet.  This
@@ -99,14 +100,14 @@ but about systems.
 
 ## Human nature is not natural at all
 
-But humans don't like nature.  Nature doesn't seem to play fair.  Virtually all religions say we
-must protect the weak.  It feels wrong to see inequality or suffering if you think something can be
-done about it.  I believe we can and should protect the weak.
+Humans don't like nature.  Nature doesn't seem to play fair.  Virtually all religions say we must
+protect the weak.  It feels wrong to see inequality or suffering if you think something can be done
+about it.  I believe we can and should protect the weak.
 
 However, humans have lost touch with nature, with reality.  In Buddhism, the goal is to see reality
 as it is, and to end the idea of a separate self:  nirvana.  I talk with many Filipinos about
-Christianity, because they are surprised I am part Filipino, but not Christian.  So, I talk about
-Buddhism, and how it's not really a religion or belief system.  One of the things that surprises
+Christianity, because they are surprised I am part Filipino but not Christian.  So, I talk about
+Buddhism and how it's not really a religion or belief system.  One of the things that surprises
 them the most is when I tell them that Buddhist priests aren't really supposed to encourage people
 to get married and have kids.
 
@@ -159,8 +160,8 @@ actually sets up an imbalance.  This imbalance is what we are seeing today.
 We need to listen, not to Facebook, or even the news.  We need to listen to each other.  To nature
 around us.  When I was a young boy up to my early teens, sometimes I would sneak out of the house at
 night, and just watch the stars in the night sky.  I would imagine that I was looking at the face of
-"God".  I hadn't quite realized yet that I only needed to look into the mirror.  But by looking at
-the night sky, just listening to the wind in the trees or the occasional hoot of an owl, I felt both
+"God".  I hadn't quite realized yet that I only needed to look inside.  But by looking at the night
+sky, just listening to the wind in the trees or the occasional hoot of an owl, I felt both
 simultaneously extremely small, and yet also vastly huge.
 
 Nature does not care if we are liberal or conservative, black or white.  These are sicknesses of the
