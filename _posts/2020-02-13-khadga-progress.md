@@ -41,7 +41,7 @@ MediaDevice.  The video element is wrapped in a moveable div element.
 
 Here's what it looks like:
 
-![alt text](https://photos.app.goo.gl/zc6fgjcbbD2mS19G7)
+![alt text](../images/Screenshot_20200214_113709.png)
 
 ## Next steps
 
