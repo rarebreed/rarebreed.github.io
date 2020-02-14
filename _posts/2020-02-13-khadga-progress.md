@@ -2,7 +2,7 @@
 layout: post
 title:  "Khadga progress"
 date:   2020-02-13 15:00:00 -0500
-categories: khadga rust wasm
+categories: rust wasm
 ---
 
 # Progress on khadga
