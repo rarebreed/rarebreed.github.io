@@ -36,12 +36,12 @@ connected users and the left most column in the webpage will be updated for user
 disconnect all in (semi) real time.
 
 Once you are logged in, you can go under More -> Webcam to turn on the webcam.  It will use the
-webassembly library (noesis) to find the react ref for the \<video\> element and get the
+webassembly library (noesis) to find the react ref for the `<video>` element and get the
 MediaDevice.  The video element is wrapped in a moveable div element.
 
 Here's what it looks like:
 
-![alt text](../images/Screenshot_20200214_113709.png)
+![alt text](https://drive.google.com/open?id=1W_H-wDrzrys0IRBfBAoL5ztQbgkrQYyw)
 
 ## Next steps
 
