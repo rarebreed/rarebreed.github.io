@@ -41,7 +41,7 @@ MediaDevice.  The video element is wrapped in a moveable div element.
 
 Here's what it looks like:
 
-![alt text](../images/Screenshot_20200214_113709.png)
+![alt text](images/Screenshot_20200214_113709.png)
 
 ## Next steps
 
@@ -65,7 +65,7 @@ So I think these are going to my next immediate steps for things to work on
   - Setup the DNS records for khadga.app (ie, CNAME, A and AAAA records)
   - Figure out how GKE/GCP does dynamic DNS
 - Improvements for the webcam
-  - Fix the webcam issue on GKE
+  - ~~Fix the webcam issue on GKE~~
   - Tensorize the data coming from the webcam
 - Start using khadga for my blogs
 - Get the events over websocket so we can actually do chats
