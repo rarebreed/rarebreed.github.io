@@ -10,7 +10,7 @@ categories: rust wasm css kubernetes
 khadga has been a really interesting project so far.  It's dusted off a few skill sets, and forced
 me to learn quite a few new ones.  Unfortunately, I haven't even been able to work on what I
 _really_ want, which is the machine learning part.  At the rate I am going, I'm figuring it will be
-about anothe 2 months to get to the point where I can start implementing tensorflow.
+about another 2 months to get to the point where I can start implementing tensorflow.
 
 That being said, here's everything I've been skilling up on in the last 2 months or so
 
