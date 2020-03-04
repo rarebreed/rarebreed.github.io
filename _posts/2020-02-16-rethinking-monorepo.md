@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Rethinking monorepos"
-date:   2020-02-13 15:00:00 -0500
+date:   2020-02-16 15:00:00 -0500
 categories: rust wasm
 ---
 

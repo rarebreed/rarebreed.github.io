@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Everything learned from khadga"
-date:   2020-02-13 15:00:00 -0500
-categories: rust wasm
+date:   2020-02-26 15:00:00 -0500
+categories: rust wasm css kubernetes
 ---
 
 # What I've learned working on khadga
