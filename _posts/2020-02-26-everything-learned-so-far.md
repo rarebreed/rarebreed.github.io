@@ -67,7 +67,7 @@ just use ReactiveX.
 
 This is the first time I had a chance to work with kubernetes.  I could have used something like a
 vanilla GCE (Google Compute Engine) or the GAE (Google App Engine) for my needs.  Currently, I've
-only got one service running, so it's not like I need a bunch of coordination for lots of little
+only got two services running, so it's not like I need a bunch of coordination for lots of little
 microservices.
 
 On the other hand, as khadga grows, and/or needs to scale out, I've got a path forward for this.

@@ -12,16 +12,19 @@ wanting to do some gardening.  I think I mentioned in an earlier blog that Moreh
 founder of Aikido, said that all warriors should learn to farm.  There's something about cultivating
 life that makes you respect and understand it more.
 
-So, I'm browsing the returned results, and I see some electronic devices that monitored 3 things:
+So, I'm browsing the returned results in Amazon, and I see some soil testing devices that monitored 3
+things:
 
 - Moisture
 - Sunlight
 - Ph levels
 
 There were also some testing kits for potassium and nitrogen, though those were chemically based
-testing kits.  But I realized that these electronic devices didn't relay any information.  Though I
-haven't looked or done any research at the industrial level, it made me think about how IoT devices
-could help improve the efficiency of gardening
+testing kits rather than electronic devices.  While reading the various product descriptions, I
+realized that these electronic devices didn't relay any information anywhere.  In other words they
+werent connected, and therefore not IoT devices.  Though I haven't looked or done any research at
+the industrial level, it made me think about how IoT devices could help improve the efficiency of
+gardening.
 
 ## Connected testing kits
 
@@ -34,15 +37,18 @@ check on their plants, vegetables or fruits.  Still, I think having this conveni
 
 ## Data collection over time
 
-What might be more useful, is to send data to be collected to be analyzed.  For what times of the
-day, and how long is there not enough sunlight?  Are there long stretches where the soil is to dry?
-Does the Ph level vary dramatically?
+What might be more useful is to send data to be collected to be analyzed.  You could ask questions
+like:
+
+- For what times of the day, and how long is there not enough sunlight?
+- Are there long stretches where the soil is to dry?
+- Does the Ph level vary dramatically?
 
 This information could be used to monitor and alert the gardner that perhaps more fertilizer is
-needed, or that where they have placed their crop is not good for sunlight levels.  At our house, we
-have quite a few trees, plus, our backyard slopes at an angle.  We therefore have lots of shadows
-being cast.  Other than cloud cover, it's hard to exactly say what spots on our land get how much
-sunlight over the course of the day.
+needed, or that where they have placed their crop is not good based on sunlight levels.  At our
+house, we have quite a few trees, plus, our backyard slopes at an angle.  We therefore have lots of
+shadows being cast.  Other than cloud cover, it's hard to exactly say what spots on our land get how
+much sunlight over the course of the day.
 
 Being in Florida, we also can have surprising amounts of rainfall in a short amount of time.
 Perhaps knowing how much moisture is in the soil can help by having better drainage or runoff in
@@ -157,12 +163,14 @@ devices until it reaches a more beefy wifi gateway device to transmit data.
 For the water gun, most of the processing should probably be done on the IoT device itself.  That
 would probably mean a beefier microcontroller with TPU support.  This has the disadvantage of having
 higher power requirements.  Another option would be to send data over for the image recognition to
-be done by something more beefy.  However, streaming data has a power cost too.
+be done by something more beefy.  However, streaming data has a power cost too.  There's also the
+problem of latencies.  So I think ideally, this processing has to be done on-device.
 
 I think some research into a middle ground processor...something between a Raspberry Pi and an
 Cortex M7 would probably be ok.  If the prediction analysis is going to be done at the edge by the
 device itself, then it needs to have a reasonable amount of calculative power.  We also want this to
-be relatively cheap.
+be relatively cheap.  The trick here is power consumption.  It needs to be able to last throughout
+the night until solar panels can recharge the battery.
 
 I would also need to look into solar panels, and charging of lithium ion batteries.
 
@@ -185,3 +193,5 @@ gateway.  That way the gateway could directly stream info the phone.
 
 If you're on 4g/5g or on some other public wi-fi, this wont work without having the data being sent
 to some public endpoint.
+
+[-khadga-app]: https://khadga.app
